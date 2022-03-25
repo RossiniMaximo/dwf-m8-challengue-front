@@ -1,0 +1,39 @@
+.main_container {
+  border: solid 2px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.img_container {
+}
+.img {
+  width: 100%;
+}
+.text_container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px;
+}
+.upper_text {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.name {
+  font-size: 15px;
+}
+
+.lower_text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-weight: bold;
+}
+.report_text {
+  font-size: 15px;
+}
+.report_text {
+  font-size: 15px;
+}

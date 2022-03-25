@@ -1,0 +1,56 @@
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+.title {
+  font-size: 25px;
+  text-align: center;
+  padding: 20px;
+}
+.label_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+.input {
+  padding: 5px;
+  border: solid 2px;
+  border-radius: 3px;
+  max-width: 200px;
+}
+.label {
+  margin-right: 105px;
+  font-size: 20px;
+}
+.img_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+.img {
+  width: 300px;
+  object-fit: cover;
+  border: groove #800000;
+}
+.map_container {
+  height: 300px;
+}
+.button_container {
+  width: 250px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+.button {
+  width: 100%;
+  padding: 5px;
+  border: solid 2px black;
+  border-radius: 4px;
+  background-color: #800000;
+  color: whitesmoke;
+  font-size: 14px;
+}

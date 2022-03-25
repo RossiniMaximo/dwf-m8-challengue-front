@@ -1,0 +1,52 @@
+.data_container {
+  height: 520px;
+}
+.title {
+  font-size: 25px;
+  text-align: center;
+  padding: 10px;
+}
+
+.textField_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.container_style {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+.labelStyle {
+  font-size: 14px;
+  font-weight: bold;
+}
+.inputStyle {
+  padding: 5px;
+  border: solid 2px;
+  border-radius: 4px;
+}
+.password_inputs__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  gap: 20px;
+}
+
+.button_container {
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+.button {
+  width: 100%;
+  padding: 5px;
+  background-color: thistle;
+  border-radius: 6px;
+  border: solid 2px;
+  font-size: 14px;
+  font-weight: bold;
+}

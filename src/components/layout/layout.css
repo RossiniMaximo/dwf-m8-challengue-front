@@ -1,0 +1,78 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.header {
+  height: 100px;
+  background-color: #800000;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+.footer {
+  background-color: #800000;
+  width: 100%;
+  height: 70px;
+  position: fixed;
+  bottom: 0;
+}
+.nav_menu {
+  display: none;
+  height: 400px;
+  gap: 10px;
+  flex-direction: column;
+  position: absolute;
+  top: 100px;
+  left: 70px;
+  background-color: aliceblue;
+  border: solid 2px;
+  border-radius: 6px;
+  padding: 5px;
+}
+
+.links {
+  background-color: #800000;
+  color: black;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+  border: solid 2px;
+  border-radius: 5px;
+  width: 250px;
+}
+
+.logo {
+  object-fit: none;
+  padding: 10px;
+}
+
+.hamburguerMenu {
+  width: 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px;
+  justify-content: center;
+}
+
+.hamburguerMenu_lines {
+  height: 8px;
+  background-color: black;
+  border-radius: 5px;
+}
+.lower_text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+.email {
+  color: #800000;
+  text-decoration: underline;
+}
+.cerrar_sesion {
+  margin-top: 10px;
+}

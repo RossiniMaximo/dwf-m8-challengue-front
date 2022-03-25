@@ -1,0 +1,43 @@
+.map_container {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 500px;
+}
+
+.button_container {
+  width: 250px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+.map {
+  border: solid 2px;
+}
+.button {
+  width: 100%;
+  padding: 5px;
+  border: solid 2px black;
+  border-radius: 4px;
+  background-color: #800000;
+  color: whitesmoke;
+  font-size: 14px;
+}
+.text_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+.container_textfield {
+  width: 250px;
+}
+.label {
+  display: flex;
+}
+.input {
+  width: 100%;
+  padding: 5px;
+  border: solid 2px;
+  border-radius: 4px;
+}

@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "outDir": "dist",
+    "jsx": "react",
+    "moduleResolution": "node",
+    "esModuleInterop": true
+  },
+  "include": [
+    "src/**/*.tsx",
+    "src/**/*.ts",
+    "src/router/router.tsx",
+    "src/index.tsx"
+  ]
+}
