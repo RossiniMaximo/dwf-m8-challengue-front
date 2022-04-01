@@ -11,7 +11,7 @@ export function PetCard(props) {
   const navigate = useNavigate();
   function handleClick(e) {
     // Desde aca debo hacer la llamada a la api y enviarle los parametros necesario para mandar el mail.
-    console.log("props.id de el pet de  la card tocada ", props);
+    /*  console.log("props.id de el pet de  la card tocada ", props); */
     setPetId(props.petId);
     navigate("/report-info");
   }
@@ -26,8 +26,8 @@ export function PetCard(props) {
           <h5 className={css.name}>{props.petname}</h5>
         </div>
         <div onClick={handleClick} className={css.lower_text}>
-          <p className={css.report_text}>REPORTAR</p>
-          <p className={css.report_text}>INFORMACIÓN</p>
+          <p className={css.report_text}>REPORT</p>
+          <p className={css.report_text}>INFORMATION</p>
         </div>
       </div>
     </form>

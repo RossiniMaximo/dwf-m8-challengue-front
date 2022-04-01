@@ -1,39 +1,55 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Text } from "../../ui/text";
 import { TextField } from "../../ui/textField";
 import { Button } from "../../ui/button";
+import { useUserData, useCheckLogStatus, useLocalStorage } from "../../hooks";
+import { createUser, updateUser } from "../../api-calls";
 import css from "./data.css";
-import { useUserData } from "../../hooks";
-import { useCheckLogStatus } from "../../hooks";
-import { createUser } from "../../api-calls";
-
-// Estoy teniendo problemas para dar de alta  al usuario en la base de datos
 
 export function Data() {
+  const navigate = useNavigate();
+  const [storagedUserData, setStoragedUserData] = useLocalStorage(
+    "user-data",
+    {}
+  );
   const [user, setUser] = useUserData();
-  const { logState } = useCheckLogStatus();
   const { setLoged } = useCheckLogStatus();
   async function handleSubmit(e) {
     e.preventDefault();
     const fullname = e.target.name.value;
-    console.log("fullname", fullname);
+    /* console.log("fullname", fullname); */
     const email = user.email;
-    setUser({ email, fullname });
+    setUser({ ...user, email, fullname });
     const password = e.target.password.value;
     const repetead_password = e.target.repetead_password.value;
-    if (logState == false) {
-      console.log("user antres del cerate", user);
-      const res = await createUser(user, password);
+
+    const body = {
+      fullname: fullname,
+      email: email,
+      password: password,
+    };
+    if (user.logged == false && password == repetead_password) {
+      const res = await createUser(body, password);
       console.log("res", res);
       if (res) {
+        setStoragedUserData({
+          email: res.email,
+          fullname: res.fullname,
+          userId: res.userId,
+          logged: true,
+        });
         setLoged(true);
+        navigate("/");
+      }
+    } else {
+      if (password == repetead_password) {
+        const update = await updateUser(body);
+        console.log("update user :", update);
       }
     }
   }
 
-  useEffect(() => {
-    console.log("user", user);
-  }, [user]);
   return (
     <form onSubmit={handleSubmit} className={css.data_container}>
       <Text children={"Private info"} style={css.title} />
@@ -45,6 +61,11 @@ export function Data() {
           inputStyle={css.inputStyle}
           type="text"
           name="name"
+          placeholder={
+            user.fullname
+              ? user.fullname
+              : JSON.parse(localStorage.getItem("user-data")).fullname
+          }
         />
       </div>
       <div className={css.password_inputs__container}>

@@ -30,6 +30,8 @@ export function MapComponent(props: mapboxSearchProps) {
     const data = await res.json();
     /*  console.log("data de la llamada a la API", data[0]); */
     const lat = parseFloat(data[0].lat);
+    console.log("lat", lat);
+
     const lon = parseFloat(data[0].lon);
     const newCoords = [lon, lat];
     setCoords(newCoords);
@@ -43,9 +45,7 @@ export function MapComponent(props: mapboxSearchProps) {
       onChange({ query: query, coords: coords });
     }
   }
-  useEffect(() => {
-    console.log("cambio el pet", pet);
-  }, [pet]);
+
   function inputChangeHandler(e) {
     setQuery(e.target.value);
   }
@@ -65,7 +65,6 @@ export function MapComponent(props: mapboxSearchProps) {
         containerStyle={{
           height: "200px",
           width: "300px",
-          border: "",
         }}
         zoom={[15]}
         center={coords}
@@ -82,7 +81,7 @@ export function MapComponent(props: mapboxSearchProps) {
           inputStyle={css.input}
           type={"text"}
           name={"location"}
-          children={"Buscar ubicación"}
+          children={"Search location"}
           value={query}
           onChange={inputChangeHandler}
         />

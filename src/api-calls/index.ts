@@ -1,11 +1,5 @@
 // Me falta contactarme con el endpoint para crear un usuario.
 
-import { json } from "stream/consumers";
-import { token } from "../atoms";
-import { useToken } from "../hooks";
-
-let key;
-
 // Este endpoint sirve para chequear si en la tabla User hay algun usuario dado de alta
 // con el email pasado
 // chequea en la api si el email existe
@@ -21,9 +15,10 @@ export async function checkEmail(email) {
     }),
   });
   const data = await res.json();
-  console.log("data", data);
+
   return {
     exists: data,
+    id: data.id,
   };
 }
 
@@ -39,10 +34,9 @@ export async function createToken(email, password) {
     body: JSON.stringify({ email, password }),
   });
   const data = await res.json();
-  key = data;
-  console.log("data del auth", data);
+  console.log("data del auth", data.token);
   return {
-    token: data,
+    token: data.token,
   };
 }
 
@@ -57,7 +51,7 @@ export async function lookForPassword(password) {
     }),
   });
   const data = await res.json();
-  console.log(data);
+  /* console.log(data);*/
   return data;
 }
 
@@ -69,8 +63,8 @@ export async function getMe() {
 }
 
 export async function createUser(user, password) {
-  console.log(user, password);
-  console.log(user.email);
+  /* console.log(user, password);
+  console.log(user.email);*/
   const res = await fetch("http://localhost:3001/auth", {
     method: "post",
     headers: {
@@ -83,13 +77,17 @@ export async function createUser(user, password) {
   });
   const data = await res.json();
   console.log("data del createUser", data);
+  if (data) {
+    const token = await createToken(user.email, password);
+    console.log("token creado al dar de alta usuario", token);
+  }
   return data;
 }
 
 export async function getNearbyPets() {
   const res = await fetch("http://localhost:3001/nearby-missed-pets");
   const data = await res.json();
-  console.log("dat del getNearby pets", data);
+  /* console.log("dat del getNearby pets", da ta);*/
 
   return data;
 }
@@ -105,22 +103,80 @@ export async function reportInfo(pet) {
     body: JSON.stringify({ pet }),
   });
   const data = await res.json();
-  console.log("data del reportInfo", data);
-  return data;
+  /* console.log("data del reportInfo", data);
+   */ return data;
 }
 
-export async function reportPet(pet) {
-  /*  console.log("token key", key.token); */
+export async function reportPet(pet, userId) {
   console.log("pet que llega", pet);
+  console.log("userId que llega", userId);
+  const key = localStorage.getItem("auth_token");
+  console.log("key antes de reportar el pet", key);
 
   const data = await fetch("http://localhost:3001/pet", {
     method: "post",
     headers: {
       "content-type": "application/json",
-      Authorization: "bearer" + " " + key.token,
+      Authorization: "bearer" + " " + key /* key.token */,
     },
-    body: JSON.stringify({ pet }),
+    body: JSON.stringify({ pet, userId }),
   });
-  console.log("data del report pet", data);
+  /* console.log("data del report pet", data)*/
   return data;
+}
+
+export async function getUserPets(userId) {
+  const res = await fetch("http://localhost:3001/user-pets", {
+    method: "post",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({ userId }),
+  });
+  const data = await res.json();
+  console.log("data del getUserPets", data);
+  return data;
+}
+
+export async function updatePet(body, petId) {
+  const key = localStorage.getItem("auth_token");
+  const res = await fetch("http://localhost:3001/pet/" + petId, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "bearer" + " " + key,
+    },
+    body: JSON.stringify({ ...body }),
+  });
+  const data = await res.json();
+  /* console.log("data del updatePet", data);
+   */ return data;
+}
+
+export async function deletePet(petId) {
+  const key = localStorage.getItem("auth_token");
+  const res = await fetch("http://localhost:3001/pet/" + petId, {
+    method: "delete",
+    headers: {
+      Authorization: "bearer" + " " + key,
+    },
+  });
+  const data = await res.json();
+  /* console.log("data del deletePet");
+  return data;*/
+}
+
+export async function updateUser(data) {
+  const key = localStorage.getItem("auth_token");
+  const res = await fetch("http://localhost:3001/update-user", {
+    method: "put",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "bearer" + " " + key,
+    },
+    body: JSON.stringify({ data }),
+  });
+  const json = await res.json();
+  /* console.log("json", json); */
+  return json;
 }

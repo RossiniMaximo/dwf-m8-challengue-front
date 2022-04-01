@@ -1,6 +1,5 @@
 .container {
   height: 390px;
-  border-top: solid 2px;
 }
 .title {
   font-size: 30px;
@@ -10,6 +9,11 @@
 .title_password {
   font-size: 24px;
   padding: 10px;
+}
+@media (min-width: 960px) {
+  .title_password {
+    text-align: center;
+  }
 }
 .text_container {
   width: 250px;

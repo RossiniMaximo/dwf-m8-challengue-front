@@ -5,4 +5,13 @@
   padding-left: 10px;
   padding-top: 10px;
   font-size: 30px;
+  margin-bottom: 40px;
+}
+@media (min-width: 960px) {
+  .title {
+    text-align: center;
+  }
+}
+.card_container {
+  margin-top: 20px;
 }

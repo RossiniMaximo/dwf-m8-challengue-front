@@ -1,25 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import css from "./layout.css";
 import logo from "../../images/logo.png";
-import { useCheckLogStatus } from "../../hooks";
+import { useUserData, useLogOut } from "../../hooks";
 
 export function Layout() {
-  const { logState } = useCheckLogStatus();
+  const [status, setStatus] = useState();
+  const [user, setUser] = useUserData();
+  const email = user.email;
   const navigate = useNavigate();
   const navMenu: any = React.createRef();
   const hmbgMenu: any = React.createRef();
   function goData() {
-    navigate("/data");
+    console.log("status in goData", status);
+    status ? navigate("/data") : navigate("/login");
   }
   function goReportedPets() {
-    navigate("/reported");
+    status ? navigate("/reported") : navigate("/login");
   }
   function goReportPet() {
-    navigate("/report-pet");
+    status ? navigate("/report-pet") : navigate("login");
   }
   function goHome() {
-    navigate("/");
+    status ? navigate("/") : navigate("login");
   }
 
   let flag = true;
@@ -36,34 +39,38 @@ export function Layout() {
     hmbgMenu.current.style.display = "flex";
   }
   function checkLogged() {
-    const userStatus = logState;
-    if (userStatus == false) {
-      navigate("/login");
-    }
-    if (!userStatus) {
-      console.log("Inicia sesión o registrate");
-    }
+    const storagedUserStatus = JSON.parse(localStorage.getItem("user-data"));
+    console.log("storagedUserStatus", storagedUserStatus);
+    const userStatus = storagedUserStatus?.logged;
+    console.log("UserStatus", userStatus);
+    setStatus(userStatus);
   }
+  function logOut() {
+    useLogOut();
+  }
+
   return (
     <div className={css.container}>
       <header className={css.header}>
         <img onClick={goHome} className={css.logo} src={logo} alt="logo" />
         <div onClick={checkLogged} ref={navMenu} className={css.nav_menu}>
           <a onClick={goData} className={css.links}>
-            Mis datos
+            Me
           </a>
           <a onClick={goReportedPets} className={css.links}>
-            Mascotas reportadas
+            Reports
           </a>
           <a onClick={goReportPet} className={css.links}>
-            Reportar mascota
+            Reportar pet
           </a>
           <a onClick={navMenuHandler} className={css.links}>
-            Cerrar
+            Close
           </a>
           <div className={css.lower_text}>
-            <p className={css.email}>maximorossini2016@gmail.com</p>
-            <p className={css.cerrar_sesion}>cerrar sesión</p>
+            <p className={css.email}>{email}</p>
+            <p onClick={logOut} className={css.cerrar_sesion}>
+              Log Out
+            </p>
           </div>
         </div>
         <div

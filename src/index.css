@@ -3,6 +3,9 @@
   margin: 0;
   font-family: "DM Sans", sans-serif;
 }
+body {
+  background-color: lavenderblush;
+}
 input:focus {
   outline: none;
 }

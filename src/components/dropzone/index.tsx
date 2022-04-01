@@ -7,7 +7,17 @@ export function DropzoneComponent() {
   const [pet, setPet] = usePetState();
   const [files, setFiles] = useState([]);
   const onDrop = useCallback((acceptedFiles) => {
-    /*  console.log("acceptedFiles", acceptedFiles); */
+    const file = acceptedFiles[0];
+    /* console.log("file", file); */
+
+    const fileReader = new FileReader();
+    fileReader.onload = (event) => {
+      /* console.log(event.target.result); */
+      setPet({ ...pet, img: event.target.result });
+    };
+    const res = fileReader.readAsDataURL(file);
+    /*  console.log("res del fileReader", res); */
+    /*  setPet({ ...pet, img: res }); */
     setFiles(
       acceptedFiles.map((file) =>
         Object.assign(file, {
@@ -15,8 +25,6 @@ export function DropzoneComponent() {
         })
       )
     );
-    /*console.log(" acceptedFiles[0].path", acceptedFiles[0].path); */
-    setPet({ ...pet, img: acceptedFiles[0].path });
   }, []);
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
@@ -28,7 +36,10 @@ export function DropzoneComponent() {
   ));
   useEffect(
     () => () => {
-      files.forEach((file) => URL.revokeObjectURL(file.preview));
+      /* console.log("files", files); */
+      files.forEach((file) => {
+        URL.revokeObjectURL(file.preview);
+      });
     },
     [files]
   );

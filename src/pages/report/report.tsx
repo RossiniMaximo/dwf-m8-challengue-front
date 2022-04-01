@@ -1,26 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Text } from "../../ui/text";
 import { TextField } from "../../ui/textField";
-import { Button } from "../../ui/button";
 import { MapComponent } from "../../components/map";
 import css from "./report.css";
-import { usePetState } from "../../hooks";
 import { DropzoneComponent } from "../../components/dropzone";
-import { reportPet } from "../../api-calls";
+import { reportPet, updatePet } from "../../api-calls";
+import { usePetId, usePetState, useUserData } from "../../hooks";
+import { useUpdateCheck } from "../../hooks";
 
 export function ReportPage() {
+  const [user, setUser] = useUserData();
   const [formData, setFormData] = useState({});
   const [pet, setPet] = usePetState();
+  const [update, setUpdate] = useUpdateCheck();
+  const [petId, setPetId] = usePetId();
   async function handleSubmit(e) {
     e.preventDefault();
     const petName = e.target.petname.value;
     setPet({ ...pet, petName: petName });
+    /*  console.log("update", update); */
+
+    if (pet.petName != "" && update == false) {
+      handleCreatePet();
+    } else if (pet.petName != "" && update == true) {
+      // handleUpdatePet
+      await updatePet(pet, petId);
+      setUpdate(false);
+    }
   }
-
-  /* useEffect(() => {
-    console.log("cambio el pet", pet);
-  }, [pet]); */
-
   function handleMapboxChange(data) {
     setFormData({
       ...formData,
@@ -29,8 +36,11 @@ export function ReportPage() {
   }
 
   async function handleCreatePet() {
-    const res = await reportPet(pet);
-    console.log("data del reportPet", res);
+    const userId = user.userId;
+    const res = await reportPet(pet, userId);
+    console.log("res del reportpet", res);
+
+    return res;
   }
 
   return (
@@ -51,11 +61,8 @@ export function ReportPage() {
         <MapComponent onChange={handleMapboxChange} />
       </div>
       <div className={css.button_container}>
-        <button onClick={handleCreatePet} className={css.button}>
-          enviar
-        </button>
+        <button className={css.button}>Send</button>
       </div>
     </form>
   );
 }
-// La llamada llega a la API pero no da respuesta de vuelta

@@ -1,17 +1,14 @@
-// Creo que tengo que crear un atomo para guardar si el user esta logged o no.
-// Y afectar con los hooks a este atomo
-// Usando esa info para hacer que mi app reaccione o actue en base a ellos.
-
-import { getMe } from "../api-calls";
+import { getMe, getUserPets, updatePet } from "../api-calls";
 import { atom, selector, useSetRecoilState } from "recoil";
 import { useEffect } from "react";
 
-// Este endpoint guarda el valor del email del user.
 export const user = atom({
-  key: "userEmail",
+  key: "user",
   default: {
     email: "",
     fullname: "",
+    userId: "",
+    logged: false,
   },
 });
 
@@ -23,6 +20,29 @@ export const userData = selector({
   get: async ({ get }) => {
     const userData = await getMe();
     return userData;
+  },
+});
+
+export const userPets = selector({
+  key: "userPets",
+  get: async ({ get }) => {
+    const userData = get(user);
+    console.log("userData ID", userData);
+    const userId = userData.userId;
+    const pets = await getUserPets(userId);
+    console.log("userPets selector", pets);
+    return pets;
+  },
+});
+
+export const updatePetSelector = selector({
+  key: "petUpdater",
+  get: async ({ get }) => {
+    const id = get(petId);
+    const data = get(pet);
+    const res = await updatePet(data, id);
+    /* console.log("res", res); */
+    return res;
   },
 });
 
@@ -53,6 +73,11 @@ export const pet = atom({
     petName: "",
     lat: 0,
     length: 0,
-    img: "",
+    img: null,
   },
+});
+
+export const update = atom({
+  key: "updateAtom",
+  default: false,
 });

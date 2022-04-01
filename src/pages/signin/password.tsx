@@ -7,15 +7,15 @@ import { useCreateToken } from "../../hooks";
 import { useUserData } from "../../hooks";
 import { useNavigate } from "react-router-dom";
 import { useCheckLogStatus } from "../../hooks";
-// Estos no van !!///////////////////////////////
-import { token } from "../../atoms";
-////////////////////////////////////////////////
+
+import { useLocalStorage } from "../../hooks";
 
 export function PutPassword() {
   const navigate = useNavigate();
   const { login } = useCreateToken();
   const { logState } = useCheckLogStatus();
   const { setLoged } = useCheckLogStatus();
+  const [userStoraged, setUserStoraged] = useLocalStorage("user-data", {});
 
   const [userData, setUserData] = useUserData();
   console.log("userdata", userData);
@@ -24,15 +24,18 @@ export function PutPassword() {
     e.preventDefault();
     const pass = e.target.password.value;
     const authRes = await login(email, pass);
+    console.log("authRes", authRes);
+
     if (authRes) {
       setLoged(true);
+      setUserStoraged({
+        ...userStoraged,
+        logged: true,
+      });
       navigate("/");
     }
-    console.log("auth response : ", authRes);
   }
-  useEffect(() => {
-    console.log("el token cambio");
-  }, [token]);
+
   useEffect(() => {
     console.log("cambio el estado del usuario", logState);
   }, [logState]);
@@ -46,9 +49,13 @@ export function PutPassword() {
         labelStyle={css.label}
         children="Password"
         inputStyle={css.input}
+        type="password"
         container_style={css.text_container}
         name="password"
       />
+      <div className={css.button_cont}>
+        <button className={css.button}>Send</button>
+      </div>
     </form>
   );
 }
