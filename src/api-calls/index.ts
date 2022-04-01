@@ -1,11 +1,7 @@
-// Me falta contactarme con el endpoint para crear un usuario.
-
-// Este endpoint sirve para chequear si en la tabla User hay algun usuario dado de alta
-// con el email pasado
-// chequea en la api si el email existe
+const API_URL = process.env.DATABASE_URL || "http://localhost:3001";
 
 export async function checkEmail(email) {
-  const res = await fetch("http://localhost:3001/find-user", {
+  const res = await fetch(API_URL + "/find-user", {
     method: "post",
     headers: {
       "content-type": "application/json",
@@ -26,7 +22,7 @@ export async function checkEmail(email) {
 //  que coincida con el email y la password pasadas.
 export async function createToken(email, password) {
   // obtiene un token
-  const res = await fetch("http://localhost:3001/auth/token", {
+  const res = await fetch(API_URL + "/auth/token", {
     method: "post",
     headers: {
       "content-type": "application/json",
@@ -41,7 +37,7 @@ export async function createToken(email, password) {
 }
 
 export async function lookForPassword(password) {
-  const res = await fetch("http://localhost:3001/find-password", {
+  const res = await fetch(API_URL + "/find-password", {
     method: "post",
     headers: {
       "content-type": "application/json",
@@ -65,7 +61,7 @@ export async function getMe() {
 export async function createUser(user, password) {
   /* console.log(user, password);
   console.log(user.email);*/
-  const res = await fetch("http://localhost:3001/auth", {
+  const res = await fetch(API_URL + "/auth", {
     method: "post",
     headers: {
       "content-type": "application/json",
@@ -85,7 +81,7 @@ export async function createUser(user, password) {
 }
 
 export async function getNearbyPets() {
-  const res = await fetch("http://localhost:3001/nearby-missed-pets");
+  const res = await fetch(API_URL + "/nearby-missed-pets");
   const data = await res.json();
   /* console.log("dat del getNearby pets", da ta);*/
 
@@ -95,7 +91,7 @@ export async function getNearbyPets() {
 // Metodo para enviar mail reportando información acerca de una mascota
 // extraviada
 export async function reportInfo(pet) {
-  const res = await fetch("http://localhost:3001/report-info", {
+  const res = await fetch(API_URL + "/report-info", {
     method: "post",
     headers: {
       "content-type": "application/json",
@@ -113,7 +109,7 @@ export async function reportPet(pet, userId) {
   const key = localStorage.getItem("auth_token");
   console.log("key antes de reportar el pet", key);
 
-  const data = await fetch("http://localhost:3001/pet", {
+  const data = await fetch(API_URL + "/pet", {
     method: "post",
     headers: {
       "content-type": "application/json",
@@ -126,7 +122,7 @@ export async function reportPet(pet, userId) {
 }
 
 export async function getUserPets(userId) {
-  const res = await fetch("http://localhost:3001/user-pets", {
+  const res = await fetch(API_URL + "/user-pets", {
     method: "post",
     headers: {
       "content-type": "application/json",
@@ -140,7 +136,7 @@ export async function getUserPets(userId) {
 
 export async function updatePet(body, petId) {
   const key = localStorage.getItem("auth_token");
-  const res = await fetch("http://localhost:3001/pet/" + petId, {
+  const res = await fetch(API_URL + "/pet/" + petId, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -155,7 +151,7 @@ export async function updatePet(body, petId) {
 
 export async function deletePet(petId) {
   const key = localStorage.getItem("auth_token");
-  const res = await fetch("http://localhost:3001/pet/" + petId, {
+  const res = await fetch(API_URL + "/pet/" + petId, {
     method: "delete",
     headers: {
       Authorization: "bearer" + " " + key,
@@ -168,7 +164,7 @@ export async function deletePet(petId) {
 
 export async function updateUser(data) {
   const key = localStorage.getItem("auth_token");
-  const res = await fetch("http://localhost:3001/update-user", {
+  const res = await fetch(API_URL + "/update-user", {
     method: "put",
     headers: {
       "Content-Type": "application/json",
