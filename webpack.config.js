@@ -1,7 +1,7 @@
 const Dotenv = require("dotenv-webpack");
 const LiveServer = require("live-server");
 const path = require("path");
-const dev = process.env.NODE_ENV == "development";
+const dev = process.env.NODE_ENV === "development";
 if (dev) {
   LiveServer.start({
     root: "./",
