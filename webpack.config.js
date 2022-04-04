@@ -1,5 +1,5 @@
 const Dotenv = require("dotenv-webpack");
-Dotenv.config({
+Dotenv?.config({
   path: path.resolve(__dirname + "/.env"),
 });
 const LiveServer = require("live-server");
