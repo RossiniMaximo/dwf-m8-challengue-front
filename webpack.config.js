@@ -51,9 +51,5 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
   },
-  plugins: [
-    new Dotenv({ systemvars: true, path: path.resolve(__dirname + "/.env") }),
-  ],
+  plugins: [new Dotenv()],
 };
-console.log("path resolve :", path.resolve(__dirname + "/.env"));
-/* resolve marca que archivos queremos que sean ejecutados */
