@@ -1,3 +1,4 @@
+require("dotenv-webpack");
 const DATABASE = process.env.DATABASE_URL || "http://localhost:3001";
 
 export async function checkEmail(email) {
