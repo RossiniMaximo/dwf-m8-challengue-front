@@ -1,7 +1,7 @@
-const DATABASE_URL = process.env.DATABASE_URL;
+const DATABASE = process.env.DATABASE_URL || "http://localhost:3001";
 
 export async function checkEmail(email) {
-  const res = await fetch(DATABASE_URL + "/find-user", {
+  const res = await fetch(DATABASE + "/find-user", {
     method: "post",
     headers: {
       "content-type": "application/json",
@@ -22,7 +22,7 @@ export async function checkEmail(email) {
 //  que coincida con el email y la password pasadas.
 export async function createToken(email, password) {
   // obtiene un token
-  const res = await fetch(DATABASE_URL + "/auth/token", {
+  const res = await fetch(DATABASE + "/auth/token", {
     method: "post",
     headers: {
       "content-type": "application/json",
@@ -37,7 +37,7 @@ export async function createToken(email, password) {
 }
 
 export async function lookForPassword(password) {
-  const res = await fetch(DATABASE_URL + "/find-password", {
+  const res = await fetch(DATABASE + "/find-password", {
     method: "post",
     headers: {
       "content-type": "application/json",
@@ -51,17 +51,10 @@ export async function lookForPassword(password) {
   return data;
 }
 
-// obtiene la data del  user vinculada al token
-export async function getMe() {
-  return {
-    data: "1234asdf",
-  };
-}
-
 export async function createUser(user, password) {
   /* console.log(user, password);
   console.log(user.email);*/
-  const res = await fetch(DATABASE_URL + "/auth", {
+  const res = await fetch(DATABASE + "/auth", {
     method: "post",
     headers: {
       "content-type": "application/json",
@@ -81,7 +74,7 @@ export async function createUser(user, password) {
 }
 
 export async function getNearbyPets() {
-  const res = await fetch(DATABASE_URL + "/nearby-missed-pets");
+  const res = await fetch(DATABASE + "/nearby-missed-pets");
   const data = await res.json();
   /* console.log("dat del getNearby pets", da ta);*/
 
@@ -91,7 +84,7 @@ export async function getNearbyPets() {
 // Metodo para enviar mail reportando información acerca de una mascota
 // extraviada
 export async function reportInfo(pet) {
-  const res = await fetch(DATABASE_URL + "/report-info", {
+  const res = await fetch(DATABASE + "/report-info", {
     method: "post",
     headers: {
       "content-type": "application/json",
@@ -109,7 +102,7 @@ export async function reportPet(pet, userId) {
   const key = localStorage.getItem("auth_token");
   console.log("key antes de reportar el pet", key);
 
-  const data = await fetch(DATABASE_URL + "/pet", {
+  const data = await fetch(DATABASE + "/pet", {
     method: "post",
     headers: {
       "content-type": "application/json",
@@ -122,7 +115,7 @@ export async function reportPet(pet, userId) {
 }
 
 export async function getUserPets(userId) {
-  const res = await fetch(DATABASE_URL + "/user-pets", {
+  const res = await fetch(DATABASE + "/user-pets", {
     method: "post",
     headers: {
       "content-type": "application/json",
@@ -136,7 +129,7 @@ export async function getUserPets(userId) {
 
 export async function updatePet(body, petId) {
   const key = localStorage.getItem("auth_token");
-  const res = await fetch(DATABASE_URL + "/pet/" + petId, {
+  const res = await fetch(DATABASE + "/pet/" + petId, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -151,7 +144,7 @@ export async function updatePet(body, petId) {
 
 export async function deletePet(petId) {
   const key = localStorage.getItem("auth_token");
-  const res = await fetch(DATABASE_URL + "/pet/" + petId, {
+  const res = await fetch(DATABASE + "/pet/" + petId, {
     method: "delete",
     headers: {
       Authorization: "bearer" + " " + key,
@@ -164,7 +157,7 @@ export async function deletePet(petId) {
 
 export async function updateUser(data) {
   const key = localStorage.getItem("auth_token");
-  const res = await fetch(DATABASE_URL + "/update-user", {
+  const res = await fetch(DATABASE + "/update-user", {
     method: "put",
     headers: {
       "Content-Type": "application/json",

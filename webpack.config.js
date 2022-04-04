@@ -1,4 +1,3 @@
-const { EnviromentPlugin } = require("webpack");
 const Dotenv = require("dotenv-webpack");
 const LiveServer = require("live-server");
 const path = require("path");
@@ -52,10 +51,6 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
   },
-  plugins: [
-    new Dotenv({
-      path: "./env",
-    }),
-  ],
+  plugins: [new Dotenv()],
 };
 /* resolve marca que archivos queremos que sean ejecutados */

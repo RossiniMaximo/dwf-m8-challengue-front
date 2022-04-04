@@ -8,7 +8,7 @@ import {
 } from "recoil";
 import { checkEmail, createToken } from "../api-calls";
 import { pet, token, update, updatePetSelector, user } from "../atoms";
-import { userData, userPets } from "../atoms";
+import { userPets } from "../atoms";
 import { userLoged } from "../atoms";
 import { petId } from "../atoms";
 

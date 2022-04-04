@@ -1,4 +1,4 @@
-import { getMe, getUserPets, updatePet } from "../api-calls";
+import { getUserPets, updatePet } from "../api-calls";
 import { atom, selector, useSetRecoilState } from "recoil";
 import { useEffect } from "react";
 
@@ -9,17 +9,6 @@ export const user = atom({
     fullname: "",
     userId: "",
     logged: false,
-  },
-});
-
-// Este selector se encarga de traer la respuesta de la llamada a la API
-// Para obtener la información del token del usuario.
-
-export const userData = selector({
-  key: "userData",
-  get: async ({ get }) => {
-    const userData = await getMe();
-    return userData;
   },
 });
 
