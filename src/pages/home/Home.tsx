@@ -6,10 +6,7 @@ import css from "./home.css";
 import { getNearbyPets } from "../../api-calls";
 import { useLocalStorage } from "../../hooks";
 import { useUserData, useUserLogUser } from "../../hooks";
-console.log(
-  "process.env.REACT_APP_DATABASE_URL",
-  process.env.REACT_APP_DATABASE_URL
-);
+console.log("process.env.DATABASE_URL", process.env.DATABASE_URL);
 
 export function Home() {
   const [logged, setLogged] = useUserLogUser();
