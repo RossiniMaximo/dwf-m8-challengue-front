@@ -7,6 +7,7 @@ import { getNearbyPets } from "../../api-calls";
 import { useLocalStorage } from "../../hooks";
 import { useUserData, useUserLogUser } from "../../hooks";
 // something is going wrong with the userId when I try to go to my reported pets
+console.log("process api", process.env.REACT_APP_DATABASE_URL);
 
 export function Home() {
   const [logged, setLogged] = useUserLogUser();

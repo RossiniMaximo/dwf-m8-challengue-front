@@ -1,4 +1,4 @@
-const API_URL = process.env.DATABASE_URL || "http://localhost:3001";
+const API_URL = process.env.REACT_APP_DATABASE_URL || "http://localhost:3001";
 
 export async function checkEmail(email) {
   const res = await fetch(API_URL + "/find-user", {
