@@ -61,7 +61,6 @@ export function Data() {
           inputStyle={css.inputStyle}
           type="text"
           name="name"
-          placeholder={user.fullname ? user.fullname : ""}
         />
       </div>
       <div className={css.password_inputs__container}>
