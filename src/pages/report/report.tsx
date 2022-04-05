@@ -38,10 +38,11 @@ export function ReportPage() {
 
   async function handleCreatePet() {
     const userId = user.userId;
-    const res = await reportPet(pet, userId);
-    console.log("res del reportpet", res);
-
-    return res;
+    if (userId) {
+      const res = await reportPet(pet, userId);
+      console.log("res del reportpet", res);
+      return res;
+    }
   }
 
   return (
