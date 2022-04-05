@@ -82,7 +82,10 @@ export async function createUser(user, password) {
 
 export async function getNearbyPets() {
   const res = await fetch(
-    "https://dwf-m7-challengue.herokuapp.com" + "/nearby-missed-pets"
+    "https://dwf-m7-challengue.herokuapp.com" + "/nearby-missed-pets",
+    {
+      mode: "no-cors",
+    }
   );
   const data = await res.json();
   /* console.log("dat del getNearby pets", da ta);*/
