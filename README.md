@@ -11,3 +11,6 @@ inmediatamente hacia la escena/page solicitada. El problema es que hay que hacer
 que la app reaccione y se de cuenta de que estas logeado.
 
 Cuando se reporta una mascota , hay que hacer doble click.
+
+También me gustaria poder appendear un cartel cada vez que se crea la pet o se inicia sesión,
+pero no me salio.
