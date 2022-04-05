@@ -7,8 +7,6 @@ import { getNearbyPets } from "../../api-calls";
 import { useLocalStorage } from "../../hooks";
 import { useUserData, useUserLogUser } from "../../hooks";
 
-console.log(process.env.DATABASE_URL);
-
 export function Home() {
   const [logged, setLogged] = useUserLogUser();
   const [user, setUser] = useUserData();
