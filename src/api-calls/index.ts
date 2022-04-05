@@ -75,6 +75,7 @@ export async function createUser(user, password) {
   console.log("data del createUser", data);
   if (data) {
     const token = await createToken(user.email, password);
+    localStorage.setItem("auth_token", token.token);
     console.log("token creado al dar de alta usuario", token);
   }
   return data;
