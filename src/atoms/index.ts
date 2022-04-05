@@ -7,7 +7,7 @@ export const user = atom({
   default: {
     email: "",
     fullname: "",
-    userId: "",
+    userId: null,
     logged: false,
   },
 });

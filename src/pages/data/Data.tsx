@@ -33,10 +33,11 @@ export function Data() {
       const res = await createUser(body, password);
       console.log("res", res);
       if (res) {
+        setUser({ ...user, userId: res.id });
         setStoragedUserData({
           email: res.email,
           fullname: res.fullname,
-          userId: res.userId,
+          userId: res.id,
           logged: true,
         });
         setLoged(true);
