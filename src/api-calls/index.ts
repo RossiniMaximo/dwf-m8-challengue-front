@@ -1,6 +1,3 @@
-import "dotenv/config";
-const DATABASE = process.env.DATABASE_URL || "http://localhost:3001";
-
 export async function checkEmail(email) {
   const res = await fetch(
     "https://dwf-m7-challengue.herokuapp.com" + "/find-user",
