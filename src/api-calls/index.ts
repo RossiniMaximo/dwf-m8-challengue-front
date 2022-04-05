@@ -5,8 +5,6 @@ export async function checkEmail(email) {
       method: "post",
       headers: {
         "content-type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "POST",
       },
       body: JSON.stringify({
         email,

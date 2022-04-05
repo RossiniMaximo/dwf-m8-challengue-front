@@ -25,9 +25,7 @@ export function Home() {
     const res = await getNearbyPets();
     setResults(res);
   }
-  useEffect(() => {
-    /* console.log("results changed", results); */
-  }, [results]);
+
   return (
     <div className={css.home_container}>
       <Text children={"Lost Pets"} style={css.title} />
