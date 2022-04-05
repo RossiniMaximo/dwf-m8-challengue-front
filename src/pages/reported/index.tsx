@@ -11,11 +11,13 @@ export function ReportedPetsPage() {
   return (
     <div className={css.container}>
       <h2 className={css.title}>Your reports : </h2>
-      {petsArr?.map((p) => {
-        <div className={css.card_container}>
-          <UserPetCard imgURL={p.imgURL} petName={p.petName} petId={p.id} />
-        </div>;
-      })}
+      {petsArr
+        ? petsArr?.map((p) => {
+            <div className={css.card_container}>
+              <UserPetCard imgURL={p.imgURL} petName={p.petName} petId={p.id} />
+            </div>;
+          })
+        : ""}
     </div>
   );
 }
