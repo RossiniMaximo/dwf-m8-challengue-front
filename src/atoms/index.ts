@@ -18,9 +18,11 @@ export const userPets = selector({
     const userData = get(user);
     console.log("userData ID", userData);
     const userId = userData.userId;
-    const pets = await getUserPets(userId);
-    console.log("userPets selector", pets);
-    return pets;
+    if (userId) {
+      const pets = await getUserPets(userId);
+      console.log("userPets selector", pets);
+      return pets;
+    }
   },
 });
 

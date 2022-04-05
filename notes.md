@@ -12,3 +12,5 @@ file: "index.html",
 
 module.exports = {
 /_ watch: dev, _/
+
+Estoy teniendo problemas al viajar a la paginar user-pets

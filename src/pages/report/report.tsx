@@ -7,6 +7,7 @@ import { DropzoneComponent } from "../../components/dropzone";
 import { reportPet, updatePet } from "../../api-calls";
 import { usePetId, usePetState, useUserData } from "../../hooks";
 import { useUpdateCheck } from "../../hooks";
+import { getUserPets } from "../../api-calls";
 
 export function ReportPage() {
   const [user, setUser] = useUserData();
