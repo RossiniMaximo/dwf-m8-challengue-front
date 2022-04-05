@@ -5,6 +5,8 @@ export async function checkEmail(email) {
       method: "post",
       headers: {
         "content-type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST",
       },
       body: JSON.stringify({
         email,
@@ -82,10 +84,7 @@ export async function createUser(user, password) {
 
 export async function getNearbyPets() {
   const res = await fetch(
-    "https://dwf-m7-challengue.herokuapp.com" + "/nearby-missed-pets",
-    {
-      mode: "no-cors",
-    }
+    "https://dwf-m7-challengue.herokuapp.com" + "/nearby-missed-pets"
   );
   const data = await res.json();
   /* console.log("dat del getNearby pets", da ta);*/
