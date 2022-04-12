@@ -24,13 +24,12 @@ export function LogIn() {
       email: response.exists.email,
       fullname: response.exists.fullname,
       userId: response.id,
-      logged: true,
+      logged: false,
     };
     /*  console.log("res", res); */
 
     if (response.exists) {
       console.log(response);
-
       setUserData(res);
       setUserInStorage(...storagedUser, res);
       navigate("/log-password");

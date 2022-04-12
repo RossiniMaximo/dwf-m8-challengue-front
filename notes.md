@@ -13,4 +13,19 @@ file: "index.html",
 module.exports = {
 /_ watch: dev, _/
 
-Estoy teniendo problemas al viajar a la paginar user-pets
+https://dwf-m7-challengue.herokuapp.com
+
+const allowedHosts = "https://dwf-m8-challenge.firebaseapp.com";
+app.use(
+cors({
+origin: allowedHosts,
+})
+);
+
+No se rellena automaticamente con la data que esta guardada en el local storage al refrescar
+
+Things to fix :
+
+Travelling to login being already logged in. (done).
+Local storage not updating the data on refresh.(done).
+Disappear the pet card when deleted.

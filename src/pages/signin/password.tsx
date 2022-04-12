@@ -24,7 +24,7 @@ export function PutPassword() {
     e.preventDefault();
     const pass = e.target.password.value;
     const authRes = await login(email, pass);
-    console.log("authRes", authRes);
+    /* console.log("authRes", authRes); */
 
     if (authRes) {
       setLoged(true);

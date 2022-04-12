@@ -17,6 +17,7 @@ export function UserPetCard(props) {
   async function deleteHandler() {
     const res = await deletePet(props.petId);
     console.log("res", res);
+    window.location.reload();
 
     return res;
   }

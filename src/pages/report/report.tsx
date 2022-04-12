@@ -5,7 +5,12 @@ import { MapComponent } from "../../components/map";
 import css from "./report.css";
 import { DropzoneComponent } from "../../components/dropzone";
 import { reportPet, updatePet } from "../../api-calls";
-import { usePetId, usePetState, useUserData } from "../../hooks";
+import {
+  useLocalStorage,
+  usePetId,
+  usePetState,
+  useUserData,
+} from "../../hooks";
 import { useUpdateCheck } from "../../hooks";
 import { getUserPets } from "../../api-calls";
 
@@ -15,6 +20,18 @@ export function ReportPage() {
   const [pet, setPet] = usePetState();
   const [update, setUpdate] = useUpdateCheck();
   const [petId, setPetId] = usePetId();
+  const [storagedUserData, setStoragedUserData] = useLocalStorage(
+    "user-data",
+    {}
+  );
+  if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+    console.info("This page is reloaded");
+    if (storagedUserData) {
+      console.log("storaged data in local storage", storagedUserData);
+      setUser(storagedUserData);
+    }
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
     const petName = e.target.petname.value;

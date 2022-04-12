@@ -11,14 +11,14 @@ export function Home() {
   const [logged, setLogged] = useUserLogUser();
   const [user, setUser] = useUserData();
   const [userData, setUserData] = useLocalStorage("user-data", {});
+  const [results, setResults] = useState([]);
 
   if (userData) {
-    /*  console.log(userData); */
+    console.log("userData", userData);
     setUser(userData);
-    setLogged(true);
+    setLogged(userData.logged);
   }
 
-  const [results, setResults] = useState([]);
   async function handleClick(e) {
     const buttonEl = e.target;
     buttonEl.classList.add(css.dissapear);

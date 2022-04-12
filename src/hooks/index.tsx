@@ -80,4 +80,6 @@ export function useLogOut() {
   setUser({ email: "", fullname: "", userId: "", logged: false });
   const [logStatus, setLogStatus] = useUserLogUser();
   setLogStatus(false);
+  const { setLoged } = useCheckLogStatus();
+  setLoged(false);
 }

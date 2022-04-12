@@ -15,6 +15,14 @@ export function Data() {
   );
   const [user, setUser] = useUserData();
   const { setLoged } = useCheckLogStatus();
+  if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+    console.info("This page is reloaded");
+    if (storagedUserData) {
+      console.log("storaged data in local storage", storagedUserData);
+      setUser(storagedUserData);
+    }
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
     const fullname = e.target.name.value;

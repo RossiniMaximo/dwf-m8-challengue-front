@@ -1,28 +1,44 @@
 import React, { useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import css from "./layout.css";
 import logo from "../../images/logo.png";
-import { useUserData, useLogOut } from "../../hooks";
+import { useUserData, useLogOut, useCheckLogStatus } from "../../hooks";
 
 export function Layout() {
+  const { logState, setLoged } = useCheckLogStatus();
   const [status, setStatus] = useState();
   const [user, setUser] = useUserData();
   const email = user.email;
   const navigate = useNavigate();
   const navMenu: any = React.createRef();
   const hmbgMenu: any = React.createRef();
+
   function goData() {
-    console.log("status in goData", status);
-    status ? navigate("/data") : navigate("/login");
+    console.log("user status  GoData", user);
+    if (!user.logged) {
+      navigate("/login");
+    } else {
+      navigate("/data");
+    }
   }
   function goReportedPets() {
-    status ? navigate("/reported") : navigate("/login");
+    console.log("user status ", user);
+    if (!user.logged) {
+      navigate("/login");
+    } else {
+      navigate("/reported");
+    }
   }
   function goReportPet() {
-    status ? navigate("/report-pet") : navigate("login");
+    console.log("user status", user);
+    if (!user.logged) {
+      navigate("/login");
+    } else {
+      navigate("/report-pet");
+    }
   }
   function goHome() {
-    status ? navigate("/") : navigate("login");
+    navigate("/");
   }
 
   let flag = true;
@@ -40,12 +56,14 @@ export function Layout() {
   }
   function checkLogged() {
     const storagedUserStatus = JSON.parse(localStorage.getItem("user-data"));
-    console.log("storagedUserStatus", storagedUserStatus);
     const userStatus = storagedUserStatus?.logged;
-    console.log("UserStatus", userStatus);
+    console.log("storagedUserStatus", userStatus);
     setStatus(userStatus);
+    setUser({ ...user, logged: userStatus });
   }
   function logOut() {
+    navigate("/");
+    window.location.reload();
     useLogOut();
   }
 
