@@ -1,6 +1,6 @@
 export async function checkEmail(email) {
   const res = await fetch(
-    "https://dwf-m8-challenge.firebaseapp.com" + "/find-user",
+    "https://dwf-m7-challengue.herokuapp.com" + "/find-user",
     {
       method: "post",
       headers: {
@@ -24,7 +24,7 @@ export async function checkEmail(email) {
 export async function createToken(email, password) {
   // obtiene un token
   const res = await fetch(
-    "https://dwf-m8-challenge.firebaseapp.com" + "/auth/token",
+    "https://dwf-m7-challengue.herokuapp.com" + "/auth/token",
     {
       method: "post",
       headers: {
@@ -42,7 +42,7 @@ export async function createToken(email, password) {
 
 export async function lookForPassword(password) {
   const res = await fetch(
-    "https://dwf-m8-challenge.firebaseapp.com" + "/find-password",
+    "https://dwf-m7-challengue.herokuapp.com" + "/find-password",
     {
       method: "post",
       headers: {
@@ -61,19 +61,16 @@ export async function lookForPassword(password) {
 export async function createUser(user, password) {
   /* console.log(user, password);
   console.log(user.email);*/
-  const res = await fetch(
-    "https://dwf-m8-challenge.firebaseapp.com" + "/auth",
-    {
-      method: "post",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        user,
-        password,
-      }),
-    }
-  );
+  const res = await fetch("https://dwf-m7-challengue.herokuapp.com" + "/auth", {
+    method: "post",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      user,
+      password,
+    }),
+  });
   const data = await res.json();
   console.log("data del createUser", data);
   if (data) {
@@ -86,7 +83,7 @@ export async function createUser(user, password) {
 
 export async function getNearbyPets() {
   const res = await fetch(
-    "https://dwf-m8-challenge.firebaseapp.com" + "/nearby-missed-pets"
+    "https://dwf-m7-challengue.herokuapp.com" + "/nearby-missed-pets"
   );
   const data = await res.json();
   /* console.log("dat del getNearby pets", da ta);*/
@@ -98,7 +95,7 @@ export async function getNearbyPets() {
 // extraviada
 export async function reportInfo(pet) {
   const res = await fetch(
-    "https://dwf-m8-challenge.firebaseapp.com" + "/report-info",
+    "https://dwf-m7-challengue.herokuapp.com" + "/report-info",
     {
       method: "post",
       headers: {
@@ -118,24 +115,21 @@ export async function reportPet(pet, userId) {
   const key = localStorage.getItem("auth_token");
   console.log("key antes de reportar el pet", key);
 
-  const data = await fetch(
-    "https://dwf-m8-challenge.firebaseapp.com" + "/pet",
-    {
-      method: "post",
-      headers: {
-        "content-type": "application/json",
-        Authorization: "bearer" + " " + key /* key.token */,
-      },
-      body: JSON.stringify({ pet, userId }),
-    }
-  );
+  const data = await fetch("https://dwf-m7-challengue.herokuapp.com" + "/pet", {
+    method: "post",
+    headers: {
+      "content-type": "application/json",
+      Authorization: "bearer" + " " + key /* key.token */,
+    },
+    body: JSON.stringify({ pet, userId }),
+  });
   /* console.log("data del report pet", data)*/
   return data;
 }
 
 export async function getUserPets(userId) {
   const res = await fetch(
-    "https://dwf-m8-challenge.firebaseapp.com" + "/user-pets",
+    "https://dwf-m7-challengue.herokuapp.com" + "/user-pets",
     {
       method: "post",
       headers: {
@@ -152,7 +146,7 @@ export async function getUserPets(userId) {
 export async function updatePet(body, petId) {
   const key = localStorage.getItem("auth_token");
   const res = await fetch(
-    "https://dwf-m8-challenge.firebaseapp.com" + "/pet/" + petId,
+    "https://dwf-m7-challengue.herokuapp.com" + "/pet/" + petId,
     {
       method: "PUT",
       headers: {
@@ -170,7 +164,7 @@ export async function updatePet(body, petId) {
 export async function deletePet(petId) {
   const key = localStorage.getItem("auth_token");
   const res = await fetch(
-    "https://dwf-m8-challenge.firebaseapp.com" + "/pet/" + petId,
+    "https://dwf-m7-challengue.herokuapp.com" + "/pet/" + petId,
     {
       method: "delete",
       headers: {
@@ -186,7 +180,7 @@ export async function deletePet(petId) {
 export async function updateUser(data) {
   const key = localStorage.getItem("auth_token");
   const res = await fetch(
-    "https://dwf-m8-challenge.firebaseapp.com" + "/update-user",
+    "https://dwf-m7-challengue.herokuapp.com" + "/update-user",
     {
       method: "put",
       headers: {
