@@ -12,7 +12,7 @@ import {
   useUserData,
 } from "../../hooks";
 import { useUpdateCheck } from "../../hooks";
-import { getUserPets } from "../../api-calls";
+import { PopUp } from "../../components/PopUp";
 
 export function ReportPage() {
   const [user, setUser] = useUserData();
@@ -24,6 +24,9 @@ export function ReportPage() {
     "user-data",
     {}
   );
+  const [flag, setFlag] = useState(false);
+  const [updateFlag, setUpdateFlag] = useState(false);
+
   if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
     console.info("This page is reloaded");
     if (storagedUserData) {
@@ -41,9 +44,8 @@ export function ReportPage() {
     if (pet.petName != "" && update == false) {
       handleCreatePet();
     } else if (pet.petName != "" && update == true) {
-      // handleUpdatePet
-      await updatePet(pet, petId);
-      setUpdate(false);
+      handleUpdatePet();
+      setUpdateFlag(false);
     }
   }
   function handleMapboxChange(data) {
@@ -58,8 +60,15 @@ export function ReportPage() {
     if (userId) {
       const res = await reportPet(pet, userId);
       console.log("res del reportpet", res);
+      setFlag(true);
       return res;
     }
+  }
+
+  async function handleUpdatePet() {
+    await updatePet(pet, petId);
+    setUpdate(false);
+    setUpdateFlag(true);
   }
 
   return (
@@ -79,9 +88,18 @@ export function ReportPage() {
       <div className={css.map_container}>
         <MapComponent onChange={handleMapboxChange} />
       </div>
-      <div className={css.button_container}>
-        <button className={css.button}>Send</button>
+      <div>
+        {updateFlag ? <PopUp style={css.popup} text={"Pet Updated!"} /> : ""}
       </div>
+      {!flag && !updateFlag ? (
+        <div className={css.button_container}>
+          <button className={css.button}>Send</button>
+        </div>
+      ) : (
+        <div>
+          {flag ? <PopUp style={css.popup} text={"Pet Reported!"} /> : ""}
+        </div>
+      )}
     </form>
   );
 }

@@ -55,3 +55,9 @@
   color: whitesmoke;
   font-size: 14px;
 }
+
+.popup {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 25px;
+}

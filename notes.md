@@ -13,8 +13,10 @@ file: "index.html",
 module.exports = {
 /_ watch: dev, _/
 
+API CALLS URL :
 https://dwf-m7-challengue.herokuapp.com
 
+BACKEND CONF :
 const allowedHosts = "https://dwf-m8-challenge.firebaseapp.com";
 app.use(
 cors({
@@ -27,3 +29,4 @@ Things to fix :
 Travelling to login being already logged in. (done).
 Local storage not updating the data on refresh.(done).
 Disappear the pet card when deleted.(done)
+Unexpected token.

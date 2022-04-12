@@ -14,7 +14,7 @@ export function Layout() {
   const hmbgMenu: any = React.createRef();
 
   function goData() {
-    console.log("user status  GoData", user);
+    /* console.log("user status  GoData", user); */
     if (!user.logged) {
       navigate("/login");
     } else {
@@ -22,7 +22,7 @@ export function Layout() {
     }
   }
   function goReportedPets() {
-    console.log("user status ", user);
+    /* console.log("user status ", user); */
     if (!user.logged) {
       navigate("/login");
     } else {
@@ -30,7 +30,7 @@ export function Layout() {
     }
   }
   function goReportPet() {
-    console.log("user status", user);
+    /* console.log("user status", user); */
     if (!user.logged) {
       navigate("/login");
     } else {
@@ -57,7 +57,7 @@ export function Layout() {
   function checkLogged() {
     const storagedUserStatus = JSON.parse(localStorage.getItem("user-data"));
     const userStatus = storagedUserStatus?.logged;
-    console.log("storagedUserStatus", userStatus);
+    /* console.log("storagedUserStatus", userStatus); */
     setStatus(userStatus);
     setUser({ ...user, logged: userStatus });
   }
