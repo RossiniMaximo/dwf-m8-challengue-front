@@ -22,10 +22,8 @@ origin: allowedHosts,
 })
 );
 
-No se rellena automaticamente con la data que esta guardada en el local storage al refrescar
-
 Things to fix :
 
 Travelling to login being already logged in. (done).
 Local storage not updating the data on refresh.(done).
-Disappear the pet card when deleted.
+Disappear the pet card when deleted.(done)
