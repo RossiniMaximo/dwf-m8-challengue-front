@@ -24,15 +24,21 @@ export function Data() {
       setUser(storagedUserData);
     }
   }
+  function handleFlag() {
+    setFlag(true);
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
+    console.log("evenrto", e);
     const fullname = e.target.name.value;
     /* console.log("fullname", fullname); */
     const email = user.email;
     setUser({ ...user, email, fullname });
     const password = e.target.password.value;
     const repetead_password = e.target.repetead_password.value;
+    console.log("password", password);
+    console.log("repetead password", repetead_password);
 
     const body = {
       fullname: fullname,
@@ -56,7 +62,7 @@ export function Data() {
     } else {
       if (password == repetead_password) {
         const update = await updateUser(body);
-        setFlag(true);
+        navigate("/");
         console.log("update user :", update);
       }
     }
@@ -94,12 +100,11 @@ export function Data() {
         />
       </div>
       <div className={css.button_container}>
-        {!flag ? (
-          <Button children="Save" style={css.button} />
-        ) : (
-          <PopUp style={css.popup} text={"Password updated!"} />
-        )}
+        <button onClick={handleFlag} className={css.button}>
+          Save
+        </button>
       </div>
+      {flag ? <PopUp style={css.popup} text={"Password updated!"} /> : ""}
     </form>
   );
 }
