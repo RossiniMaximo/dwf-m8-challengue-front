@@ -18,7 +18,7 @@ export function Data() {
   const { setLoged } = useCheckLogStatus();
   if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
     console.info("This page is reloaded");
-    if (storagedUserData) {
+    if (storagedUserData && user.email == "") {
       console.log("storaged data in local storage", storagedUserData);
       setUser(storagedUserData);
     }
@@ -29,15 +29,14 @@ export function Data() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log("evenrto", e);
     const fullname = e.target.name.value;
     /* console.log("fullname", fullname); */
     const email = user.email;
     setUser({ ...user, email, fullname });
     const password = e.target.password.value;
     const repetead_password = e.target.repetead_password.value;
-    console.log("password", password);
-    console.log("repetead password", repetead_password);
+    /*   console.log("password", password);
+    console.log("repetead password", repetead_password); */
 
     const body = {
       fullname: fullname,
@@ -45,6 +44,8 @@ export function Data() {
       password: password,
     };
     if (user.logged == false && password == repetead_password) {
+      console.log("user.logged", user.logged);
+
       const res = await createUser(body, password);
       console.log("res", res);
       if (res) {
