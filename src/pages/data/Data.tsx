@@ -5,6 +5,7 @@ import { TextField } from "../../ui/textField";
 import { Button } from "../../ui/button";
 import { useUserData, useCheckLogStatus, useLocalStorage } from "../../hooks";
 import { createUser, updateUser } from "../../api-calls";
+import { PopUp } from "../../components/PopUp";
 import css from "./data.css";
 
 export function Data() {
@@ -14,6 +15,7 @@ export function Data() {
     {}
   );
   const [user, setUser] = useUserData();
+  const [flag, setFlag] = useState(false);
   const { setLoged } = useCheckLogStatus();
   if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
     console.info("This page is reloaded");
@@ -54,6 +56,7 @@ export function Data() {
     } else {
       if (password == repetead_password) {
         const update = await updateUser(body);
+        setFlag(true);
         console.log("update user :", update);
       }
     }
@@ -91,7 +94,11 @@ export function Data() {
         />
       </div>
       <div className={css.button_container}>
-        <Button children="Save" style={css.button} />
+        {!flag ? (
+          <Button children="Save" style={css.button} />
+        ) : (
+          <PopUp style={css.popup} text={"Password updated!"} />
+        )}
       </div>
     </form>
   );

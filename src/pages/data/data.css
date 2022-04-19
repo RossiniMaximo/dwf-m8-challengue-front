@@ -51,3 +51,9 @@
   font-weight: bold;
   text-align: center;
 }
+
+.popup {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 25px;
+}
