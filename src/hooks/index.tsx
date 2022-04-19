@@ -19,6 +19,7 @@ export const usePetId = () => useRecoilState(petId);
 export const usePetState = () => useRecoilState(pet);
 export const useToken = () => useRecoilState(token);
 export const useUpdateCheck = () => useRecoilState(update);
+export const usePet = () => useRecoilState(pet);
 
 // Esta es la función que se lleva a cabo en la escena de password se usa para crear un token
 export function useCreateToken() {
@@ -44,12 +45,6 @@ export function useCheckLogStatus() {
     logState,
     setLoged,
   };
-}
-
-export function useGetUserPets() {
-  const userPetsArr = useRecoilValue(userPets);
-  /* console.log("user pets array", userPetsArr); */
-  return userPetsArr;
 }
 
 export function useLocalStorage(key, initialValue) {

@@ -17,24 +17,36 @@ export function Layout() {
     /* console.log("user status  GoData", user); */
     if (!user.logged) {
       navigate("/login");
+      navMenu.current.style.display = "none";
+      hmbgMenu.current.style.display = "flex";
     } else {
       navigate("/data");
+      navMenu.current.style.display = "none";
+      hmbgMenu.current.style.display = "flex";
     }
   }
   function goReportedPets() {
     /* console.log("user status ", user); */
     if (!user.logged) {
       navigate("/login");
+      navMenu.current.style.display = "none";
+      hmbgMenu.current.style.display = "flex";
     } else {
       navigate("/reported");
+      navMenu.current.style.display = "none";
+      hmbgMenu.current.style.display = "flex";
     }
   }
   function goReportPet() {
     /* console.log("user status", user); */
     if (!user.logged) {
       navigate("/login");
+      navMenu.current.style.display = "none";
+      hmbgMenu.current.style.display = "flex";
     } else {
       navigate("/report-pet");
+      navMenu.current.style.display = "none";
+      hmbgMenu.current.style.display = "flex";
     }
   }
   function goHome() {
@@ -87,7 +99,7 @@ export function Layout() {
           <div className={css.lower_text}>
             <p className={css.email}>{email}</p>
             <p onClick={logOut} className={css.cerrar_sesion}>
-              Log Out
+              {user.logged ? "Log Out" : ""}
             </p>
           </div>
         </div>

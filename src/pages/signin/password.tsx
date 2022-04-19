@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import css from "./index.css";
 import { Button } from "../../ui/button";
 import { TextField } from "../../ui/textField";
@@ -16,7 +16,7 @@ export function PutPassword() {
   const { logState } = useCheckLogStatus();
   const { setLoged } = useCheckLogStatus();
   const [userStoraged, setUserStoraged] = useLocalStorage("user-data", {});
-
+  const [flag, setFlag] = useState(false);
   const [userData, setUserData] = useUserData();
   console.log("userdata", userData);
   const email = userData.email;
@@ -33,6 +33,8 @@ export function PutPassword() {
         logged: true,
       });
       navigate("/");
+    } else {
+      setFlag(true);
     }
   }
 
@@ -56,6 +58,7 @@ export function PutPassword() {
       <div className={css.button_cont}>
         <button className={css.button}>Send</button>
       </div>
+      {flag ? <div className={css.wrong_pass}>Wrong password!</div> : ""}
     </form>
   );
 }

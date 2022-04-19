@@ -30,23 +30,16 @@ export function ReportPage() {
   if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
     console.info("This page is reloaded");
     if (storagedUserData) {
-      console.log("storaged data in local storage", storagedUserData);
+      /* console.log("storaged data in local storage", storagedUserData); */
       setUser(storagedUserData);
     }
   }
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
     const petName = e.target.petname.value;
     setPet({ ...pet, petName: petName });
     /*  console.log("update", update); */
-
-    if (pet.petName != "" && update == false) {
-      handleCreatePet();
-    } else if (pet.petName != "" && update == true) {
-      handleUpdatePet();
-      setUpdateFlag(false);
-    }
   }
   function handleMapboxChange(data) {
     setFormData({
@@ -54,7 +47,14 @@ export function ReportPage() {
       mapbox: data,
     });
   }
-
+  function handleClick() {
+    if (pet.petName != "" && update == false) {
+      handleCreatePet();
+    } else if (pet.petName != "" && update == true) {
+      handleUpdatePet();
+      setUpdateFlag(false);
+    }
+  }
   async function handleCreatePet() {
     const userId = user.userId;
     if (userId) {
@@ -78,6 +78,7 @@ export function ReportPage() {
         children="name"
         type="text"
         name="petname"
+        placeholder={update ? pet.petName : ""}
         container_style={css.label_container}
         inputStyle={css.input}
         labelStyle={css.label}
@@ -93,7 +94,12 @@ export function ReportPage() {
       </div>
       {!flag && !updateFlag ? (
         <div className={css.button_container}>
-          <button className={css.button}>Send</button>
+          <button onClick={handleClick} className={css.button}>
+            Send
+          </button>
+          <div className={css.lower_text}>
+            Double click on Send button to report your pet!
+          </div>
         </div>
       ) : (
         <div>

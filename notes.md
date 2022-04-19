@@ -26,7 +26,6 @@ origin: allowedHosts,
 
 Things to fix :
 
-Travelling to login being already logged in. (done).
-Local storage not updating the data on refresh.(done).
-Disappear the pet card when deleted.(done)
-Unexpected token.
+A la hora de reportar mascotas no se porque se reportan varias veces, recién se reporto 3 veces xd, y también como que el botón de search de mapbox hace que se envié el reporte a la api (creo)
+
+Maybe using a React reference on each button and react when it's clicked could fix this behavior.

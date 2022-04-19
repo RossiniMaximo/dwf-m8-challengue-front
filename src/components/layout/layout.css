@@ -30,7 +30,8 @@
 }
 @media (min-width: 960px) {
   .nav_menu {
-    left: 500px;
+    left: 1017px;
+    top: 5px;
   }
 }
 

@@ -1,16 +1,18 @@
 import React from "react";
 import css from "./userPetCard.css";
 import { useNavigate } from "react-router-dom";
-import { usePetId, useUpdateCheck } from "../../hooks";
+import { usePet, usePetId, useUpdateCheck } from "../../hooks";
 import trashIcon from "../../images/garbage.png";
 import { deletePet } from "../../api-calls";
 
 export function UserPetCard(props) {
   const [petId, setPetId] = usePetId();
+  const [petName, setPetName] = usePet();
   const navigate = useNavigate();
   const [update, setUpdate] = useUpdateCheck();
   function handler() {
     setPetId(props.petId);
+    setPetName({ ...petName, petName: props.petName });
     setUpdate(true);
     navigate("/report-pet");
   }

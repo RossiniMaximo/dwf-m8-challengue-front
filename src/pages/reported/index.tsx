@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import css from "./reported.css";
-import { useGetUserPets, useLocalStorage, useUserData } from "../../hooks";
+import { useLocalStorage, useUserData } from "../../hooks";
 import { UserPetCard } from "../../components/userPetCard";
+import { getUserPets } from "../../api-calls";
 
 export function ReportedPetsPage() {
   const [user, setUser] = useUserData();
-  const petsArr = useGetUserPets();
-  console.log("petsArr", petsArr);
+  const [pets, setPets] = useState([]);
+  const [flag, setFlag] = useState(false);
+
+  async function getPets() {
+    const pets = await getUserPets(user.userId);
+    if (!flag) {
+      setFlag(true);
+      setPets(pets);
+      console.log("pets", pets);
+    }
+  }
+  getPets();
+
   const [storagedUserData, setStoragedUserData] = useLocalStorage(
     "user-data",
     {}
@@ -20,9 +32,9 @@ export function ReportedPetsPage() {
   }
   return (
     <div className={css.container}>
-      <h2 className={css.title}>Your reports : {petsArr.length} </h2>
-      {petsArr
-        ? petsArr?.map((p) => {
+      <h2 className={css.title}>Your reports : {pets.length} </h2>
+      {pets
+        ? pets.map((p) => {
             return (
               <div className={css.card_container}>
                 <UserPetCard
