@@ -103,7 +103,11 @@ export function Data() {
           Save
         </button>
       </div>
-      {flag ? <PopUp style={css.popup} text={"Password updated!"} /> : ""}
+      {flag && user.logged ? (
+        <PopUp style={css.popup} text={"Password updated!"} />
+      ) : (
+        ""
+      )}
     </form>
   );
 }
