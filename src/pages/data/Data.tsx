@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Text } from "../../ui/text";
 import { TextField } from "../../ui/textField";
-import { Button } from "../../ui/button";
 import { useUserData, useCheckLogStatus, useLocalStorage } from "../../hooks";
 import { createUser, updateUser } from "../../api-calls";
 import { PopUp } from "../../components/PopUp";
