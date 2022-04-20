@@ -82,20 +82,24 @@ export async function createUser(user, password) {
 }
 
 export async function getNearbyPets() {
-  const geoRes = await fetch(
-    "https://geolocation-db.com/json/0f761a30-fe14-11e9-b59f-e53803842572"
-  );
-  const geoData = await geoRes.json();
-  const lat = geoData.latitude;
-  const lng = geoData.longitude;
-  const res = await fetch(
-    "https://dwf-m7-challengue.herokuapp.com" + "/nearby-missed-pets",
-    { body: JSON.stringify({ lat, lng }) }
-  );
-  const data = await res.json();
-  /* console.log("dat del getNearby pets", da ta);*/
+  try {
+    const geoRes = await fetch(
+      "https://geolocation-db.com/json/0f761a30-fe14-11e9-b59f-e53803842572"
+    );
+    const geoData = await geoRes.json();
+    const lat = geoData.latitude;
+    const lng = geoData.longitude;
+    const res = await fetch(
+      "https://dwf-m7-challengue.herokuapp.com" + "/nearby-missed-pets",
+      { body: JSON.stringify({ lat, lng }) }
+    );
+    const data = await res.json();
+    /* console.log("dat del getNearby pets", da ta);*/
 
-  return data;
+    return data;
+  } catch (error) {
+    console.error("There was an error getting nearby pets", error);
+  }
 }
 
 // Metodo para enviar mail reportando información acerca de una mascota
