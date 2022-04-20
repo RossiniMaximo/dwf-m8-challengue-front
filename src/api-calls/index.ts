@@ -91,7 +91,13 @@ export async function getNearbyPets() {
     const lng = geoData.longitude;
     const res = await fetch(
       "https://dwf-m7-challengue.herokuapp.com" + "/nearby-missed-pets",
-      { body: JSON.stringify({ lat, lng }) }
+      {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ lat, lng }),
+      }
     );
     const data = await res.json();
     /* console.log("dat del getNearby pets", da ta);*/
