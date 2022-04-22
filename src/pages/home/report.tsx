@@ -39,7 +39,11 @@ export function SubmitInfo() {
     const res = await reportInfo(pet);
   }
   return (
-    <form onSubmit={handleSubmit} style={{ backgroundImage: `url(${img})` }}>
+    <form
+      onSubmit={handleSubmit}
+      style={{ backgroundImage: `url(${img})` }}
+      className={css.info_container}
+    >
       <TextField {...props} />
       <TextField {...props2} />
       <div className={css.text_area__container}>
