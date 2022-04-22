@@ -1,13 +1,16 @@
 export async function checkEmail(email) {
-  const res = await fetch("http://localhost:3001" + "/find-user", {
-    method: "post",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify({
-      email,
-    }),
-  });
+  const res = await fetch(
+    "https://dwf-m7-challengue.herokuapp.com" + "/find-user",
+    {
+      method: "post",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+      }),
+    }
+  );
   const data = await res.json();
 
   return {
@@ -20,13 +23,16 @@ export async function checkEmail(email) {
 //  que coincida con el email y la password pasadas.
 export async function createToken(email, password) {
   // obtiene un token
-  const res = await fetch("http://localhost:3001" + "/auth/token", {
-    method: "post",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify({ email, password }),
-  });
+  const res = await fetch(
+    "https://dwf-m7-challengue.herokuapp.com" + "/auth/token",
+    {
+      method: "post",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    }
+  );
   const data = await res.json();
   console.log("data del auth", data.token);
   return {
@@ -35,15 +41,18 @@ export async function createToken(email, password) {
 }
 
 export async function lookForPassword(password) {
-  const res = await fetch("http://localhost:3001" + "/find-password", {
-    method: "post",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify({
-      password,
-    }),
-  });
+  const res = await fetch(
+    "https://dwf-m7-challengue.herokuapp.com" + "/find-password",
+    {
+      method: "post",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        password,
+      }),
+    }
+  );
   const data = await res.json();
   /* console.log(data);*/
   return data;
@@ -52,7 +61,7 @@ export async function lookForPassword(password) {
 export async function createUser(user, password) {
   /* console.log(user, password);
   console.log(user.email);*/
-  const res = await fetch("http://localhost:3001" + "/auth", {
+  const res = await fetch("https://dwf-m7-challengue.herokuapp.com" + "/auth", {
     method: "post",
     headers: {
       "content-type": "application/json",
@@ -80,13 +89,16 @@ export async function getNearbyPets() {
     const geoData = await geoRes.json();
     const lat = geoData.latitude;
     const lng = geoData.longitude;
-    const res = await fetch("http://localhost:3001" + "/nearby-missed-pets", {
-      method: "post",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ lat, lng }),
-    });
+    const res = await fetch(
+      "https://dwf-m7-challengue.herokuapp.com" + "/nearby-missed-pets",
+      {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ lat, lng }),
+      }
+    );
     const data = await res.json();
     /* console.log("dat del getNearby pets", da ta);*/
 
@@ -99,13 +111,16 @@ export async function getNearbyPets() {
 // Metodo para enviar mail reportando información acerca de una mascota
 // extraviada
 export async function reportInfo(pet) {
-  const res = await fetch("http://localhost:3001" + "/report-info", {
-    method: "post",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify({ pet }),
-  });
+  const res = await fetch(
+    "https://dwf-m7-challengue.herokuapp.com" + "/report-info",
+    {
+      method: "post",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ pet }),
+    }
+  );
   const data = await res.json();
   /* console.log("data del reportInfo", data);
    */ return data;
@@ -117,7 +132,7 @@ export async function reportPet(pet, userId) {
   const key = localStorage.getItem("auth_token");
   console.log("key antes de reportar el pet", key);
 
-  const data = await fetch("http://localhost:3001" + "/pet", {
+  const data = await fetch("https://dwf-m7-challengue.herokuapp.com" + "/pet", {
     method: "post",
     headers: {
       "content-type": "application/json",
@@ -130,13 +145,16 @@ export async function reportPet(pet, userId) {
 }
 
 export async function getUserPets(userId) {
-  const res = await fetch("http://localhost:3001" + "/user-pets", {
-    method: "post",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify({ userId }),
-  });
+  const res = await fetch(
+    "https://dwf-m7-challengue.herokuapp.com" + "/user-pets",
+    {
+      method: "post",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ userId }),
+    }
+  );
   const data = await res.json();
   console.log("data del getUserPets", data);
   return data;
@@ -144,14 +162,17 @@ export async function getUserPets(userId) {
 
 export async function updatePet(body, petId) {
   const key = localStorage.getItem("auth_token");
-  const res = await fetch("http://localhost:3001" + "/pet/" + petId, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "bearer" + " " + key,
-    },
-    body: JSON.stringify({ ...body }),
-  });
+  const res = await fetch(
+    "https://dwf-m7-challengue.herokuapp.com" + "/pet/" + petId,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "bearer" + " " + key,
+      },
+      body: JSON.stringify({ ...body }),
+    }
+  );
   const data = await res.json();
   /* console.log("data del updatePet", data);
    */ return data;
@@ -159,12 +180,15 @@ export async function updatePet(body, petId) {
 
 export async function deletePet(petId) {
   const key = localStorage.getItem("auth_token");
-  const res = await fetch("http://localhost:3001" + "/pet/" + petId, {
-    method: "delete",
-    headers: {
-      Authorization: "bearer" + " " + key,
-    },
-  });
+  const res = await fetch(
+    "https://dwf-m7-challengue.herokuapp.com" + "/pet/" + petId,
+    {
+      method: "delete",
+      headers: {
+        Authorization: "bearer" + " " + key,
+      },
+    }
+  );
   const data = await res.json();
   /* console.log("data del deletePet");
   return data;*/
@@ -172,14 +196,17 @@ export async function deletePet(petId) {
 
 export async function updateUser(data) {
   const key = localStorage.getItem("auth_token");
-  const res = await fetch("http://localhost:3001" + "/update-user", {
-    method: "put",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "bearer" + " " + key,
-    },
-    body: JSON.stringify({ data }),
-  });
+  const res = await fetch(
+    "https://dwf-m7-challengue.herokuapp.com" + "/update-user",
+    {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "bearer" + " " + key,
+      },
+      body: JSON.stringify({ data }),
+    }
+  );
   const json = await res.json();
   /* console.log("json", json); */
   return json;
