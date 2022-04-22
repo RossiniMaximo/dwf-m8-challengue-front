@@ -24,5 +24,5 @@ origin: allowedHosts,
 })
 );
 
-Things to fix :
-The problem is that the petName is not being changed when the form is submited.
+What was i doing ?
+I was cheking if the new API worked fine returning nearby lost pets. But heroku was throwing some service error.
