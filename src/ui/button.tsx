@@ -2,8 +2,8 @@ import React from "react";
 
 export function Button(props) {
   return (
-    <div onClick={props.clickHandler} className={props.style}>
+    <button onClick={props.clickHandler} className={props.style} type="button">
       {props.children}
-    </div>
+    </button>
   );
 }
