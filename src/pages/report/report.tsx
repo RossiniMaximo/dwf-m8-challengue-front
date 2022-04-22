@@ -28,7 +28,7 @@ export function ReportPage() {
     setPet({ ...pet });
     handleClick();
   }, [pet.petName]);
-  const [flag, setFlag] = useState(false);
+  const [createPetFlag, setCreatePetFlag] = useState(false);
   const [updateFlag, setUpdateFlag] = useState(false);
   const [formData, setFormData] = useState({});
 
@@ -43,6 +43,7 @@ export function ReportPage() {
   function handleClick() {
     if (pet.petName != "" && update == false) {
       handleCreatePet();
+      setCreatePetFlag(false);
     } else if (pet.petName != "" && update == true) {
       handleUpdatePet();
       setUpdateFlag(false);
@@ -52,7 +53,7 @@ export function ReportPage() {
     const userId = user.userId;
     const res = await reportPet(pet, userId);
     console.log("res del reportpet", res);
-    setFlag(true);
+    setCreatePetFlag(true);
     return res;
   }
 
