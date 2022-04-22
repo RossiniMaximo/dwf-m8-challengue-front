@@ -24,10 +24,11 @@
   align-items: center;
   padding: 10px;
   color: white;
+  background-color: darkred;
 }
 @media (min-width: 960px) {
   .text_container {
-    background: firebrick;
+    background: darkred;
     margin: 0 auto;
     width: 400px;
     border: solid 2px black;

@@ -27,11 +27,17 @@ export function ReportPage() {
   useEffect(() => {
     console.log("pet", pet);
     setPet({ ...pet });
-    handleClick();
+    if (update) {
+      setUpdateFlag(true);
+    } else {
+      setCreatePetFlag(true);
+    }
   }, [pet.petName]);
   const [createPetFlag, setCreatePetFlag] = useState(false);
   const [updateFlag, setUpdateFlag] = useState(false);
   const [formData, setFormData] = useState({});
+  const [created, setCreated] = useState(false);
+  const [updated, setUpdated] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -39,27 +45,34 @@ export function ReportPage() {
     const petName = e.target.petName.value;
     console.log("petName target value  : ", petName);
     setPet({ ...pet, petName: petName });
-  }
+    if (updateFlag && petName) {
+      const updated = handleUpdatePet(petName);
+      if (updated) {
+        setUpdated(true);
+      }
+    }
+    if (createPetFlag && petName) {
+      const created = handleCreatePet(petName);
+      console.log("created:", created);
 
-  function handleClick() {
-    if (pet.petName != "" && update == false) {
-      handleCreatePet();
-      setCreatePetFlag(false);
-    } else if (pet.petName != "" && update == true) {
-      handleUpdatePet();
-      setUpdateFlag(false);
+      if (created) {
+        setCreated(true);
+      }
     }
   }
-  async function handleCreatePet() {
+
+  async function handleCreatePet(petName) {
     const userId = user.userId;
-    const res = await reportPet(pet, userId);
+    const res = await reportPet({ ...pet, petName: petName }, userId);
     console.log("res del reportpet", res);
     setCreatePetFlag(true);
     return res;
   }
 
-  async function handleUpdatePet() {
-    const update = await updatePet(pet, petId);
+  async function handleUpdatePet(petName) {
+    const update = await updatePet({ ...pet, petName: petName }, petId);
+    console.log("UPDATE", update);
+
     setUpdate(false);
     setUpdateFlag(true);
     return update;
@@ -95,21 +108,15 @@ export function ReportPage() {
         <MapComponent onChange={handleMapboxChange} />
       </div>
       <div>
-        {updateFlag ? <PopUp style={css.popup} text={"Pet Updated!"} /> : ""}
+        {updated ? <PopUp style={css.popup} text={"Pet Updated!"} /> : ""}
       </div>
-      {!createPetFlag && !updateFlag ? (
-        <div className={css.button_container}>
-          <button className={css.button}>Send</button>
-        </div>
-      ) : (
-        <div>
-          {createPetFlag ? (
-            <PopUp style={css.popup} text={"Pet Reported!"} />
-          ) : (
-            ""
-          )}
-        </div>
-      )}
+      <div className={css.button_container}>
+        <button className={css.button}>Send</button>
+      </div>
+      <div>
+        {created ? <PopUp style={css.popup} text={"Pet Reported!"} /> : ""}
+      </div>
+      )
     </form>
   );
 }
