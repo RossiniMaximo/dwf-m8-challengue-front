@@ -92,7 +92,7 @@ export function ReportPage() {
       <div>
         {updateFlag ? <PopUp style={css.popup} text={"Pet Updated!"} /> : ""}
       </div>
-      {!flag && !updateFlag ? (
+      {!createPetFlag && !updateFlag ? (
         <div className={css.button_container}>
           <button className={css.button}>Send</button>
           <div className={css.lower_text}>
@@ -101,7 +101,11 @@ export function ReportPage() {
         </div>
       ) : (
         <div>
-          {flag ? <PopUp style={css.popup} text={"Pet Reported!"} /> : ""}
+          {createPetFlag ? (
+            <PopUp style={css.popup} text={"Pet Reported!"} />
+          ) : (
+            ""
+          )}
         </div>
       )}
     </form>
