@@ -61,7 +61,7 @@ export const pet = atom({
   default: {
     petName: "",
     lat: 0,
-    length: 0,
+    lng: 0,
     img: null,
   },
 });

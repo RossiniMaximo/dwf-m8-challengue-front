@@ -45,12 +45,12 @@ export function DropzoneComponent() {
   );
 
   return (
-    <section>
+    <div>
       <p className={css.title}>Drag an image or click to choose one</p>
       <div className={css.container} {...getRootProps()}>
         <input className={css.input} {...getInputProps()} />
         <aside className={css.aside}>{thumbs}</aside>
       </div>
-    </section>
+    </div>
   );
 }

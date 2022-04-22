@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text } from "../../ui/text";
 import { TextField } from "../../ui/textField";
 import { MapComponent } from "../../components/map";
@@ -16,7 +16,6 @@ import { PopUp } from "../../components/PopUp";
 
 export function ReportPage() {
   const [user, setUser] = useUserData();
-  const [formData, setFormData] = useState({});
   const [pet, setPet] = usePetState();
   const [update, setUpdate] = useUpdateCheck();
   const [petId, setPetId] = usePetId();
@@ -24,29 +23,23 @@ export function ReportPage() {
     "user-data",
     {}
   );
+  useEffect(() => {
+    console.log("pet", pet);
+    setPet({ ...pet });
+    handleClick();
+  }, [pet.petName]);
   const [flag, setFlag] = useState(false);
   const [updateFlag, setUpdateFlag] = useState(false);
-
-  if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-    console.info("This page is reloaded");
-    if (storagedUserData) {
-      /* console.log("storaged data in local storage", storagedUserData); */
-      setUser(storagedUserData);
-    }
-  }
+  const [formData, setFormData] = useState({});
 
   function handleSubmit(e) {
     e.preventDefault();
-    const petName = e.target.petname.value;
+    console.log("form submitted");
+    const petName = e.target.petName.value;
+    console.log("petName target value  : ", petName);
     setPet({ ...pet, petName: petName });
-    /*  console.log("update", update); */
   }
-  function handleMapboxChange(data) {
-    setFormData({
-      ...formData,
-      mapbox: data,
-    });
-  }
+
   function handleClick() {
     if (pet.petName != "" && update == false) {
       handleCreatePet();
@@ -57,18 +50,24 @@ export function ReportPage() {
   }
   async function handleCreatePet() {
     const userId = user.userId;
-    if (userId) {
-      const res = await reportPet(pet, userId);
-      console.log("res del reportpet", res);
-      setFlag(true);
-      return res;
-    }
+    const res = await reportPet(pet, userId);
+    console.log("res del reportpet", res);
+    setFlag(true);
+    return res;
   }
 
   async function handleUpdatePet() {
-    await updatePet(pet, petId);
+    const update = await updatePet(pet, petId);
     setUpdate(false);
     setUpdateFlag(true);
+    return update;
+  }
+  function handleMapboxChange(data) {
+    // voy agregando data al state interno del form
+    setFormData({
+      ...formData,
+      mapbox: data,
+    });
   }
 
   return (
@@ -77,7 +76,7 @@ export function ReportPage() {
       <TextField
         children="name"
         type="text"
-        name="petname"
+        name="petName"
         placeholder={update ? pet.petName : ""}
         container_style={css.label_container}
         inputStyle={css.input}
@@ -94,9 +93,7 @@ export function ReportPage() {
       </div>
       {!flag && !updateFlag ? (
         <div className={css.button_container}>
-          <button onClick={handleClick} className={css.button}>
-            Send
-          </button>
+          <button className={css.button}>Send</button>
           <div className={css.lower_text}>
             Double click on Send button to report your pet!
           </div>

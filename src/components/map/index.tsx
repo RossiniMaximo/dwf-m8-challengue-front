@@ -38,7 +38,7 @@ export function MapComponent(props: mapboxSearchProps) {
     setPet({
       ...pet,
       lat: lat,
-      length: lon,
+      lng: lon,
     });
 
     if (onChange) {
@@ -52,6 +52,7 @@ export function MapComponent(props: mapboxSearchProps) {
 
   function keydownInputHandler(e) {
     // si no es con form, tengo que agregar esto
+    e.preventDefault();
     if (e.key == "Enter") {
       search();
     }
@@ -82,12 +83,15 @@ export function MapComponent(props: mapboxSearchProps) {
           type={"text"}
           name={"location"}
           children={"Search location"}
+          onKeyDown={keydownInputHandler}
           value={query}
           onChange={inputChangeHandler}
         />
       </div>
       <div className={css.button_container}>
-        <Button style={css.button} children={"Search"} clickHandler={search} />
+        <button className={css.button} onClick={search} type="button">
+          Search
+        </button>
       </div>
     </div>
   );

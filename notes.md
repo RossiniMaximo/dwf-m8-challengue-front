@@ -25,7 +25,4 @@ origin: allowedHosts,
 );
 
 Things to fix :
-
-A la hora de reportar mascotas no se porque se reportan varias veces, recién se reporto 3 veces xd, y también como que el botón de search de mapbox hace que se envié el reporte a la api (creo)
-
-Maybe using a React reference on each button and react when it's clicked could fix this behavior.
+The problem is that the petName is not being changed when the form is submited.

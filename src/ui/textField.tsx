@@ -11,6 +11,7 @@ export function TextField(props) {
         name={props.name}
         onChange={props.onChange}
         placeholder={props.placeholder}
+        onKeyDown={props.onKeyDown}
       />
     </div>
   );
