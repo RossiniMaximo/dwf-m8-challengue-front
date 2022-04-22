@@ -13,7 +13,7 @@ export function Home() {
   const [user, setUser] = useUserData();
   const [userData, setUserData] = useLocalStorage("user-data", {});
   const [results, setResults] = useState([]);
-
+  const text: any = React.createRef();
   if (userData) {
     console.log("userData", userData);
     setUser(userData);
@@ -23,6 +23,7 @@ export function Home() {
   async function handleClick(e) {
     const buttonEl = e.target;
     buttonEl.classList.add(css.dissapear);
+    text.current.style.display = "none";
     const res = await getNearbyPets();
     setResults(res);
   }
@@ -35,6 +36,7 @@ export function Home() {
       <Text children={"Lost Pets"} style={css.title} />
       <div className={css.text_container}>
         <Text
+          ref={text}
           children={
             "Give the app access to your location in order to show lost pets"
           }
