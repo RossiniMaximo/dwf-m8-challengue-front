@@ -6,6 +6,7 @@ import { useUserData, useCheckLogStatus, useLocalStorage } from "../../hooks";
 import { createUser, updateUser } from "../../api-calls";
 import { PopUp } from "../../components/PopUp";
 import css from "./data.css";
+import img from "../../images/background.png";
 
 export function Data() {
   const navigate = useNavigate();
@@ -69,7 +70,11 @@ export function Data() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className={css.data_container}>
+    <form
+      style={{ backgroundImage: `url(${img})` }}
+      onSubmit={handleSubmit}
+      className={css.data_container}
+    >
       <Text children={"Private info"} style={css.title} />
       <div className={css.textField_container}>
         <TextField

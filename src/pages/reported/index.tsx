@@ -3,6 +3,7 @@ import css from "./reported.css";
 import { useLocalStorage, useUserData } from "../../hooks";
 import { UserPetCard } from "../../components/userPetCard";
 import { getUserPets } from "../../api-calls";
+import img from "../../images/background.png";
 
 export function ReportedPetsPage() {
   const [user, setUser] = useUserData();
@@ -31,7 +32,7 @@ export function ReportedPetsPage() {
     }
   }
   return (
-    <div className={css.container}>
+    <div style={{ backgroundImage: `url(${img})` }} className={css.container}>
       <h2 className={css.title}>Your reports : {pets.length} </h2>
       {pets
         ? pets.map((p) => {

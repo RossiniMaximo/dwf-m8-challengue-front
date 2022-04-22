@@ -3,6 +3,8 @@ import { reportInfo } from "../../api-calls";
 import { usePetId } from "../../hooks";
 import { Button } from "../../ui/button";
 import { TextField } from "../../ui/textField";
+import img from "../../images/background.png";
+
 import css from "./home.css";
 const props = {
   children: "Your name",
@@ -37,7 +39,7 @@ export function SubmitInfo() {
     const res = await reportInfo(pet);
   }
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{ backgroundImage: `url(${img})` }}>
       <TextField {...props} />
       <TextField {...props2} />
       <div className={css.text_area__container}>

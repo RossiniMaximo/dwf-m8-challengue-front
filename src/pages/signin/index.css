@@ -1,14 +1,16 @@
 .container {
-  height: 390px;
+  height: 100vh;
 }
 .title {
   font-size: 30px;
   text-align: center;
   padding: 20px;
+  color: cadetblue;
 }
 .title_password {
   font-size: 24px;
   padding: 10px;
+  color: cadetblue;
 }
 @media (min-width: 960px) {
   .title_password {

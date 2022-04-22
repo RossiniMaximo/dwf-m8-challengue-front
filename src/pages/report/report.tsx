@@ -13,6 +13,7 @@ import {
 } from "../../hooks";
 import { useUpdateCheck } from "../../hooks";
 import { PopUp } from "../../components/PopUp";
+import img from "../../images/background.png";
 
 export function ReportPage() {
   const [user, setUser] = useUserData();
@@ -72,7 +73,11 @@ export function ReportPage() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className={css.container}>
+    <form
+      style={{ backgroundImage: `url(${img})` }}
+      onSubmit={handleSubmit}
+      className={css.container}
+    >
       <Text style={css.title} children="Report pet" />
       <TextField
         children="name"

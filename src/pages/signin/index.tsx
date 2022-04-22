@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useUserEmail } from "../../hooks";
 import { checkEmail } from "../../api-calls";
 import { useLocalStorage } from "../../hooks";
-
+import img from "../../images/background.png";
 export function LogIn() {
   const navigate = useNavigate();
   const [userData, setUserData] = useUserEmail();
@@ -45,7 +45,11 @@ export function LogIn() {
   }
 
   return (
-    <form onSubmit={submitHandler} className={css.container}>
+    <form
+      style={{ backgroundImage: `url(${img})` }}
+      onSubmit={submitHandler}
+      className={css.container}
+    >
       <Text children="Create an account" style={css.title} />
       <TextField
         labelStyle={css.label}

@@ -6,6 +6,7 @@ import css from "./home.css";
 import { getNearbyPets } from "../../api-calls";
 import { useLocalStorage } from "../../hooks";
 import { useUserData, useUserLogUser } from "../../hooks";
+import img from "../../images/background.png";
 
 export function Home() {
   const [logged, setLogged] = useUserLogUser();
@@ -27,7 +28,10 @@ export function Home() {
   }
 
   return (
-    <div className={css.home_container}>
+    <div
+      style={{ backgroundImage: `url(${img})` }}
+      className={css.home_container}
+    >
       <Text children={"Lost Pets"} style={css.title} />
       <div className={css.text_container}>
         <Text
