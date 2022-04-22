@@ -100,9 +100,6 @@ export function ReportPage() {
       {!createPetFlag && !updateFlag ? (
         <div className={css.button_container}>
           <button className={css.button}>Send</button>
-          <div className={css.lower_text}>
-            Double click on Send button to report your pet!
-          </div>
         </div>
       ) : (
         <div>
