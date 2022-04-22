@@ -83,7 +83,6 @@ export function MapComponent(props: mapboxSearchProps) {
           type={"text"}
           name={"location"}
           children={"Search location"}
-          onKeyDown={keydownInputHandler}
           value={query}
           onChange={inputChangeHandler}
         />
