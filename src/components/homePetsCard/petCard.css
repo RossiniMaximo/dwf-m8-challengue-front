@@ -19,7 +19,7 @@
   width: 100%;
   height: 350px;
   padding: 40px;
-  background-color: black;
+  background-color: darkred;
   color: white;
 }
 @media (min-width: 960px) {
@@ -33,7 +33,7 @@
   width: 100%;
   color: white;
   padding: 20px;
-  background-color: black;
+  background-color: darkred;
   border-radius: 20px;
 }
 @media (min-width: 960px) {
