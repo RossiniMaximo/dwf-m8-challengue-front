@@ -5,7 +5,8 @@
   font-size: 30px;
   text-align: center;
   padding: 20px;
-  color: cadetblue;
+  color: darkred;
+  margin-top: 40px;
 }
 .title_password {
   font-size: 24px;
@@ -29,6 +30,7 @@
   display: block;
   font-size: 18px;
   font-weight: bold;
+  color: darkred;
 }
 .input {
   padding: 10px;
@@ -42,6 +44,10 @@
   margin-top: 20px;
 }
 
+.button:hover {
+  color: white;
+  background-color: darkred;
+}
 .button {
   width: 100%;
   padding: 5px;

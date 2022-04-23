@@ -29,6 +29,11 @@
   padding: 5px;
 }
 
+.links:hover {
+  background-color: darkmagenta;
+  color: white;
+  border: solid 2px black;
+}
 .links {
   background-color: #800000;
   color: black;

@@ -50,7 +50,7 @@ export function LogIn() {
       onSubmit={submitHandler}
       className={css.container}
     >
-      <Text children="Create an account" style={css.title} />
+      <Text children="Enter you email" style={css.title} />
       <TextField
         labelStyle={css.label}
         children="Email"
