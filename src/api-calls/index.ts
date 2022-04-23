@@ -86,23 +86,27 @@ export async function getNearbyPets() {
     const geoRes = await fetch("https://geolocation-db.com/json/");
     console.log("geoRes", geoRes);
     const geoData = await geoRes.json();
-    console.log("geo data", geoData.ña);
+    console.log("geo data", geoData);
     const lat = geoData.latitude;
     const lng = geoData.longitude;
-    const res = await fetch(
-      "https://dwf-m7-challengue.herokuapp.com" + "/nearby-missed-pets",
-      {
-        method: "post",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(lat, lng),
-      }
-    );
-    const data = await res.json();
-    /* console.log("dat del getNearby pets", da ta);*/
+    if (geoData) {
+      const res = await fetch(
+        "https://dwf-m7-challengue.herokuapp.com" + "/nearby-missed-pets",
+        {
+          method: "post",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({ lat, lng }),
+        }
+      );
+      console.log("res", res);
 
-    return data;
+      const data = await res.json();
+      console.log("dat del getNearby pets", data);
+
+      return data;
+    }
   } catch (error) {
     console.error("There was an error getting nearby pets", error);
   }

@@ -26,3 +26,5 @@ origin: allowedHosts,
 
 What was i doing ?
 I was cheking if the new API worked fine returning nearby lost pets. But heroku was throwing some service error.
+
+The API calls are now working and now I'm going to work in the UI a little bit.
