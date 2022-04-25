@@ -91,7 +91,7 @@ export function Layout() {
             Reports
           </a>
           <a onClick={goReportPet} className={css.links}>
-            Reportar pet
+            Report pet
           </a>
           <a onClick={navMenuHandler} className={css.links}>
             Close

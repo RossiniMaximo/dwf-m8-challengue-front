@@ -24,13 +24,12 @@ export function ReportPage() {
     "user-data",
     {}
   );
-  if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-    console.info("This page is reloaded");
-    if (storagedUserData && user.email == "") {
-      console.log("storaged data in local storage", storagedUserData);
-      setUser(storagedUserData);
-    }
-  }
+  const [createPetFlag, setCreatePetFlag] = useState(false);
+  const [updateFlag, setUpdateFlag] = useState(false);
+  const [formData, setFormData] = useState({});
+  const [created, setCreated] = useState(false);
+  const [updated, setUpdated] = useState(false);
+
   useEffect(() => {
     console.log("pet", pet);
     setPet({ ...pet });
@@ -40,11 +39,13 @@ export function ReportPage() {
       setCreatePetFlag(true);
     }
   }, [pet.petName]);
-  const [createPetFlag, setCreatePetFlag] = useState(false);
-  const [updateFlag, setUpdateFlag] = useState(false);
-  const [formData, setFormData] = useState({});
-  const [created, setCreated] = useState(false);
-  const [updated, setUpdated] = useState(false);
+  if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+    console.info("This page is reloaded");
+    if (storagedUserData && user.email == "") {
+      console.log("storaged data in local storage", storagedUserData);
+      setUser(storagedUserData);
+    }
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -117,9 +118,13 @@ export function ReportPage() {
       <div>
         {updated ? <PopUp style={css.popup} text={"Pet Updated!"} /> : ""}
       </div>
-      <div className={css.button_container}>
-        <button className={css.button}>Send</button>
-      </div>
+      {!created ? (
+        <div className={css.button_container}>
+          <button className={css.button}>Send</button>
+        </div>
+      ) : (
+        ""
+      )}
       <div>
         {created ? <PopUp style={css.popup} text={"Pet Reported!"} /> : ""}
       </div>
