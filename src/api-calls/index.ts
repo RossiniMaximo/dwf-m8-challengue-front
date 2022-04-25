@@ -81,35 +81,26 @@ export async function createUser(user, password) {
   return data;
 }
 
-export async function getNearbyPets() {
-  try {
-    const geoRes = await fetch("https://geolocation-db.com/json/");
-    console.log("geoRes", geoRes);
-    const geoData = await geoRes.json();
-    console.log("geo data", geoData);
-    const lat = geoData.latitude;
-    const lng = geoData.longitude;
-    if (geoData) {
-      const res = await fetch(
-        "https://dwf-m7-challengue.herokuapp.com" + "/nearby-missed-pets",
-        {
-          method: "post",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({ lat, lng }),
-        }
-      );
-      console.log("res", res);
-
-      const data = await res.json();
-      console.log("dat del getNearby pets", data);
-
-      return data;
+export async function getNearbyPets(lat, lng) {
+  const res = await fetch(
+    "https://dwf-m7-challengue.herokuapp.com" + "/nearby-missed-pets",
+    {
+      method: "post",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        lat,
+        lng,
+      }),
     }
-  } catch (error) {
-    console.error("There was an error getting nearby pets", error);
-  }
+  );
+  const data = await res.json();
+  console.log("data del getNearby pets", data);
+  return data;
+
+  console.log("location", location);
+  return location;
 }
 
 // Metodo para enviar mail reportando información acerca de una mascota
@@ -165,6 +156,8 @@ export async function getUserPets(userId) {
 }
 
 export async function updatePet(body, petId) {
+  console.log("body received in UpdatePet", body);
+
   const key = localStorage.getItem("auth_token");
   const res = await fetch(
     "https://dwf-m7-challengue.herokuapp.com" + "/pet/" + petId,
@@ -174,7 +167,7 @@ export async function updatePet(body, petId) {
         "Content-Type": "application/json",
         Authorization: "bearer" + " " + key,
       },
-      body: JSON.stringify({ ...body }),
+      body: JSON.stringify(body),
     }
   );
   const data = await res.json();

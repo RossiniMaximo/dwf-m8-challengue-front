@@ -6,7 +6,7 @@ import { useUserData, useCheckLogStatus, useLocalStorage } from "../../hooks";
 import { createUser, updateUser } from "../../api-calls";
 import { PopUp } from "../../components/PopUp";
 import css from "./data.css";
-import img from "../../images/background.png";
+import img from "../../images/image.png";
 
 export function Data() {
   const navigate = useNavigate();

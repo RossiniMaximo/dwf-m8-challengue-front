@@ -13,7 +13,7 @@ import {
 } from "../../hooks";
 import { useUpdateCheck } from "../../hooks";
 import { PopUp } from "../../components/PopUp";
-import img from "../../images/background.png";
+import img from "../../images/image.png";
 
 export function ReportPage() {
   const [user, setUser] = useUserData();
@@ -24,6 +24,13 @@ export function ReportPage() {
     "user-data",
     {}
   );
+  if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+    console.info("This page is reloaded");
+    if (storagedUserData && user.email == "") {
+      console.log("storaged data in local storage", storagedUserData);
+      setUser(storagedUserData);
+    }
+  }
   useEffect(() => {
     console.log("pet", pet);
     setPet({ ...pet });
@@ -39,20 +46,20 @@ export function ReportPage() {
   const [created, setCreated] = useState(false);
   const [updated, setUpdated] = useState(false);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     console.log("form submitted");
     const petName = e.target.petName.value;
     console.log("petName target value  : ", petName);
     setPet({ ...pet, petName: petName });
     if (updateFlag && petName) {
-      const updated = handleUpdatePet(petName);
+      const updated = await handleUpdatePet(petName);
       if (updated) {
         setUpdated(true);
       }
     }
     if (createPetFlag && petName) {
-      const created = handleCreatePet(petName);
+      const created = await handleCreatePet(petName);
       console.log("created:", created);
 
       if (created) {

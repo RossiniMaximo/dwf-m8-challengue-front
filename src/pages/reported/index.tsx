@@ -3,7 +3,7 @@ import css from "./reported.css";
 import { useLocalStorage, useUserData } from "../../hooks";
 import { UserPetCard } from "../../components/userPetCard";
 import { getUserPets } from "../../api-calls";
-import img from "../../images/background.png";
+import img from "../../images/image.png";
 
 export function ReportedPetsPage() {
   const [user, setUser] = useUserData();
@@ -34,20 +34,23 @@ export function ReportedPetsPage() {
   return (
     <div style={{ backgroundImage: `url(${img})` }} className={css.container}>
       <h2 className={css.title}>Your reports : {pets.length} </h2>
-      {pets
-        ? pets.map((p) => {
-            return (
-              <div className={css.card_container}>
-                <UserPetCard
-                  imgURL={p.imgURL}
-                  petName={p.petName}
-                  petId={p.id}
-                  key={p.id}
-                />
-              </div>
-            );
-          })
-        : "There is no pet reported."}
+      <div className={css.content_container}>
+        {pets
+          ? pets.map((p) => {
+              return (
+                <div className={css.card_container}>
+                  <UserPetCard
+                    imgURL={p.imgURL}
+                    petName={p.petName}
+                    petId={p.id}
+                    key={p.id}
+                  />
+                </div>
+              );
+            })
+          : "There is no pet reported."}
+      </div>
+      );
     </div>
   );
 }

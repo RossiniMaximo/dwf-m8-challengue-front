@@ -3,7 +3,7 @@ import { reportInfo } from "../../api-calls";
 import { usePetId } from "../../hooks";
 import { Button } from "../../ui/button";
 import { TextField } from "../../ui/textField";
-import img from "../../images/background.png";
+import img from "../../images/image.png";
 
 import css from "./home.css";
 const props = {

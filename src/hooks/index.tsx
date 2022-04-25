@@ -8,9 +8,7 @@ import {
 } from "recoil";
 import { checkEmail, createToken } from "../api-calls";
 import { pet, token, update, updatePetSelector, user } from "../atoms";
-import { userPets } from "../atoms";
-import { userLoged } from "../atoms";
-import { petId } from "../atoms";
+import { userPets, petId, userLoged } from "../atoms";
 
 export const useUserLogUser = () => useRecoilState(userLoged);
 export const useUserData = () => useRecoilState(user);

@@ -63,6 +63,7 @@ export const pet = atom({
     lat: 0,
     lng: 0,
     img: null,
+    location: "",
   },
 });
 

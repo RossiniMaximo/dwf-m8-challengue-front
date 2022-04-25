@@ -24,7 +24,9 @@ export function PetCard(props) {
       <div className={css.text_container}>
         <div className={css.upper_text}>
           <h5 className={css.name}>{props.petname}</h5>
+          <h5 className={css.location}>{props.location}</h5>
         </div>
+
         <div onClick={handleClick} className={css.lower_text}>
           <p className={css.report_text}>REPORT</p>
           <p className={css.report_text}>INFORMATION</p>

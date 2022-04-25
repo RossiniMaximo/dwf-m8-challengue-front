@@ -4,9 +4,9 @@ import { Button } from "../../ui/button";
 import { PetCard } from "../../components/homePetsCard/PetCard";
 import css from "./home.css";
 import { getNearbyPets } from "../../api-calls";
-import { useLocalStorage } from "../../hooks";
+import { useLocalStorage, useLogOut } from "../../hooks";
 import { useUserData, useUserLogUser } from "../../hooks";
-import img from "../../images/background.png";
+import img from "../../images/image.png";
 
 export function Home() {
   const [logged, setLogged] = useUserLogUser();
@@ -20,12 +20,19 @@ export function Home() {
     setLogged(userData.logged);
   }
 
-  async function handleClick(e) {
+  function handleClick(e) {
     const buttonEl = e.target;
     setProvided(true);
     buttonEl.classList.add(css.dissapear);
-    const res = await getNearbyPets();
-    setResults(res);
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+      console.log("lat", lat);
+      console.log("lng", lng);
+      const call = await getNearbyPets(lat, lng);
+      setResults(call);
+      console.log("call", call);
+    });
   }
 
   return (
@@ -55,16 +62,19 @@ export function Home() {
         </div>
       </div>
       <div className={css.cards_container}>
-        {results?.map((r) => {
-          return (
-            <PetCard
-              petname={r.petName}
-              imgURL={r.imgURL}
-              key={r.objectID}
-              petId={r.objectID}
-            />
-          );
-        })}
+        {results
+          ? results.map((r) => {
+              return (
+                <PetCard
+                  petname={r.petName}
+                  imgURL={r.imgURL}
+                  key={r.objectID}
+                  petId={r.objectID}
+                  location={r.location}
+                />
+              );
+            })
+          : ""}
       </div>
     </div>
   );

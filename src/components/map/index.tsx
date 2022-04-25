@@ -47,6 +47,7 @@ export function MapComponent(props: mapboxSearchProps) {
   }
 
   function inputChangeHandler(e) {
+    setPet({ ...pet, location: e.target.value });
     setQuery(e.target.value);
   }
 
